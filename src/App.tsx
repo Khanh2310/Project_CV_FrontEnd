@@ -8,30 +8,29 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import NotFound from 'components/share/not.found';
-import Loading from 'components/share/loading';
-import LoginPage from 'pages/auth/login';
-import RegisterPage from 'pages/auth/register';
-import LayoutAdmin from 'components/admin/layout.admin';
-import ProtectedRoute from 'components/share/protected-route.ts';
-import Header from 'components/client/header.client';
-import Footer from 'components/client/footer.client';
-import HomePage from 'pages/home';
+import { fetchAccount } from './redux/slice/accountSlice';
+import { LayoutApp, NotFound } from './components/shared';
+import { HomePage } from './pages/home';
+import { ClientJobPage } from './pages/job';
+import { ClientJobDetailPage } from './pages/job/detail';
+import { ClientCompanyPage } from './pages/company';
+import { ClientCompanyDetailPage } from './pages/company/detail';
+import { LayoutAdmin } from './components/admin/layout.admin';
+import { ProtectedRoute } from './components/shared/protected-route';
+import {
+  CompanyPage,
+  DashboardPage,
+  JobPage,
+  PermissionPage,
+  ResumePage,
+  RolePage,
+  UserPage,
+} from './pages/admin';
+import { ViewUpsertJob } from './components/admin/job';
+import { LoginPage, RegisterPage } from './pages/auth';
+import { Header } from './components/client';
+import Footer from './components/client/footer.client';
 import styles from 'styles/app.module.scss';
-import DashboardPage from './pages/admin/dashboard';
-import CompanyPage from './pages/admin/company';
-import PermissionPage from './pages/admin/permission';
-import ResumePage from './pages/admin/resume';
-import RolePage from './pages/admin/role';
-import UserPage from './pages/admin/user';
-import { fetchAccount } from './redux/slice/accountSlide';
-import LayoutApp from './components/share/layout.app';
-import JobPage from './pages/admin/job';
-import ViewUpsertJob from './components/admin/job/upsert.job';
-import ClientJobPage from './pages/job';
-import ClientJobDetailPage from './pages/job/detail';
-import ClientCompanyPage from './pages/company';
-import ClientCompanyDetailPage from './pages/company/detail';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState('');

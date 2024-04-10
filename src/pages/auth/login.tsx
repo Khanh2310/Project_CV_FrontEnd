@@ -7,7 +7,7 @@ import styles from 'styles/auth.module.scss';
 import { useAppSelector } from '@/redux/hooks';
 import { setUserLoginInfo } from '@/redux/slice/accountSlice';
 
-const LoginPage = () => {
+export const LoginPage = () => {
   const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
@@ -101,5 +101,3 @@ const LoginPage = () => {
     </div>
   );
 };
-
-export default LoginPage;
