@@ -12,7 +12,6 @@ interface IState {
   };
   result: IUser[];
 }
-// First, create the thunk
 export const fetchUser = createAsyncThunk(
   'user/fetchUser',
   async ({ query }: { query: string }) => {
@@ -35,25 +34,19 @@ const initialState: IState = {
 export const userSlide = createSlice({
   name: 'user',
   initialState,
-  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
-    // Use the PayloadAction type to declare the contents of `action.payload`
-    setActiveMenu: (state, action) => {
-      // state.activeMenu = action.payload;
-    },
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    setActiveMenu: (state, action) => {},
   },
   extraReducers: (builder) => {
-    // Add reducers for additional action types here, and handle loading state as needed
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchUser.pending, (state, action) => {
       state.isFetching = true;
-      // Add user to the state array
-      // state.courseOrder = action.payload;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchUser.rejected, (state, action) => {
       state.isFetching = false;
-      // Add user to the state array
-      // state.courseOrder = action.payload;
     });
 
     builder.addCase(fetchUser.fulfilled, (state, action) => {

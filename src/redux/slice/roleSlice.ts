@@ -71,6 +71,7 @@ export const roleSlide = createSlice({
       state.isFetching = true;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchRole.rejected, (state, action) => {
       state.isFetching = false;
       // Add user to the state array
@@ -88,6 +89,7 @@ export const roleSlide = createSlice({
       // state.courseOrder = action.payload;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchRoleById.pending, (state, action) => {
       state.isFetchSingle = true;
       state.singleRole = {
@@ -101,6 +103,7 @@ export const roleSlide = createSlice({
       // state.courseOrder = action.payload;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchRoleById.rejected, (state, action) => {
       state.isFetchSingle = false;
       state.singleRole = {
