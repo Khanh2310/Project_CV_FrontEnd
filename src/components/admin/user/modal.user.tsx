@@ -31,7 +31,7 @@ export interface ICompanySelect {
   key?: string;
 }
 
-const ModalUser = (props: IProps) => {
+export const ModalUser = (props: IProps) => {
   const { openModal, setOpenModal, reloadTable, dataInit, setDataInit } = props;
   const [companies, setCompanies] = useState<ICompanySelect[]>([]);
   const [roles, setRoles] = useState<ICompanySelect[]>([]);
@@ -295,5 +295,3 @@ const ModalUser = (props: IProps) => {
     </>
   );
 };
-
-export default ModalUser;

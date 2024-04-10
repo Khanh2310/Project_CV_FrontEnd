@@ -23,7 +23,7 @@ import { callLogout } from '@/config/api';
 
 const { Content, Sider } = Layout;
 
-const LayoutAdmin = () => {
+export const LayoutAdmin = () => {
   const location = useLocation();
 
   const [collapsed, setCollapsed] = useState(false);
@@ -242,5 +242,3 @@ const LayoutAdmin = () => {
     </>
   );
 };
-
-export default LayoutAdmin;

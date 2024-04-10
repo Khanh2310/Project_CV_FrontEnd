@@ -36,7 +36,7 @@ import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from '@/types/backend';
 
-const ViewUpsertJob = () => {
+export const ViewUpsertJob = () => {
   const [companies, setCompanies] = useState<ICompanySelect[]>([]);
 
   const navigate = useNavigate();
@@ -375,5 +375,3 @@ const ViewUpsertJob = () => {
     </div>
   );
 };
-
-export default ViewUpsertJob;
