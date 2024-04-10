@@ -15,7 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { Access } from '@/components/shared';
 import { DataTable } from '@/components/client/data-table';
-import { fetchJob } from '@/redux/slice/jobSlice';
+import { fetchJob } from '@/redux/slice/jobSlide';
 
 export const JobPage = () => {
   const tableRef = useRef<ActionType>();

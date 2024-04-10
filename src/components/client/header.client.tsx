@@ -17,7 +17,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { callLogout } from '@/config/api';
-import { setLogoutAction } from '@/redux/slice/accountSlice';
+import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { ManageAccount } from './modal';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { setRefreshTokenAction } from '@/redux/slice/accountSlice';
+import { setRefreshTokenAction } from '@/redux/slice/accountSlide';
 
 import { message } from 'antd';
 import { useEffect } from 'react';

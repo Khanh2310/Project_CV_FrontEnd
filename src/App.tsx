@@ -8,7 +8,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { fetchAccount } from './redux/slice/accountSlice';
+import { fetchAccount } from './redux/slice/accountSlide';
 import { LayoutApp, NotFound } from './components/shared';
 import { HomePage } from './pages/home';
 import { ClientJobPage } from './pages/job';
@@ -56,6 +56,7 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isLoading = useAppSelector((state) => state.account.isLoading);
 
   useEffect(() => {
@@ -65,6 +66,7 @@ export default function App() {
     )
       return;
     dispatch(fetchAccount());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const router = createBrowserRouter([

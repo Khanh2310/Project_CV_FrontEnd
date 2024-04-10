@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { Access } from '@/components/shared';
 import { DataTable } from '@/components/client/data-table';
-import { fetchUser } from '@/redux/slice/userSlice';
+import { fetchUser } from '@/redux/slice/userSlide';
 import { ModalUser, ViewDetailUser } from '@/components/admin/user';
 
 export const UserPage = () => {

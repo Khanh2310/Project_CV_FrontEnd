@@ -11,7 +11,7 @@ import { colorMethod } from '@/config/utils';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { Access } from '@/components/shared';
 import { DataTable } from '@/components/client/data-table';
-import { fetchPermission } from '@/redux/slice/permissionSlice';
+import { fetchPermission } from '@/redux/slice/permissionSlide';
 import {
   ModalPermission,
   ViewDetailPermission,

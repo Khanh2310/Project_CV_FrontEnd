@@ -10,7 +10,7 @@ import queryString from 'query-string';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { Access } from '@/components/shared';
 import { DataTable } from '@/components/client/data-table';
-import { fetchCompany } from '@/redux/slice/companySlice';
+import { fetchCompany } from '@/redux/slice/companySlide';
 import { ModalCompany } from '@/components/admin/company';
 
 export const CompanyPage = () => {

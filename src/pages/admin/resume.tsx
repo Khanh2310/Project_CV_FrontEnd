@@ -17,7 +17,7 @@ import { useNavigate } from 'react-router-dom';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { Access } from '@/components/shared';
 import { DataTable } from '@/components/client/data-table';
-import { fetchResume } from '@/redux/slice/resumeSlice';
+import { fetchResume } from '@/redux/slice/resumeSlide';
 import { ViewDetailResume } from '@/components/admin/resume';
 
 export const ResumePage = () => {

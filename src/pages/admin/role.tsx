@@ -9,7 +9,7 @@ import { callDeleteRole } from '@/config/api';
 import queryString from 'query-string';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import { Access } from '@/components/shared';
-import { fetchRole, fetchRoleById } from '@/redux/slice/roleSlice';
+import { fetchRole, fetchRoleById } from '@/redux/slice/roleSlide';
 import { DataTable } from '@/components/client/data-table';
 import { ModalRole } from '@/components/admin/role';
 
