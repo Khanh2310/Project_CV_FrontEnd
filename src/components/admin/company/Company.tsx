@@ -30,16 +30,18 @@ import {
   callUpdateCompany,
   callUploadSingleFile,
 } from '@/config/api';
+import { ICompany } from '@/types/backend';
 import { v4 as uuidv4 } from 'uuid';
 import enUS from 'antd/lib/locale/en_US';
-import { ICompany } from '@/types';
+
 interface IProps {
   openModal: boolean;
   setOpenModal: (v: boolean) => void;
   dataInit?: ICompany | null;
-  setDataInit: (v: unknown) => void;
+  setDataInit: (v: any) => void;
   reloadTable: () => void;
 }
+
 interface ICompanyForm {
   name: string;
   address: string;
@@ -49,7 +51,8 @@ interface ICompanyLogo {
   name: string;
   uid: string;
 }
-export const Company = (props: IProps) => {
+
+export const ModalCompany = (props: IProps) => {
   const { openModal, setOpenModal, reloadTable, dataInit, setDataInit } = props;
 
   //modal animation
@@ -130,7 +133,6 @@ export const Company = (props: IProps) => {
     setAnimation('open');
   };
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleRemoveFile = (file: any) => {
     setDataLogo([]);
   };
