@@ -36,7 +36,7 @@ import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from '@/types/backend';
 
-const ViewUpsertJob = (props: any) => {
+const ViewUpsertJob = () => {
   const [companies, setCompanies] = useState<ICompanySelect[]>([]);
 
   const navigate = useNavigate();
@@ -78,6 +78,7 @@ const ViewUpsertJob = (props: any) => {
     };
     init();
     return () => form.resetFields();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   // Usage of DebounceSelect

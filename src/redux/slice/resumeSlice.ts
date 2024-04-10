@@ -1,9 +1,10 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { callFetchJob, callFetchResume } from '@/config/api';
+import { callFetchResume } from '@/config/api';
 import { IResume } from '@/types/backend';
 
 interface IState {
+  singleRole: any;
   isFetching: boolean;
   meta: {
     current: number;
