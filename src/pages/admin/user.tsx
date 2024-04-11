@@ -1,4 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { fetchUser } from '@/redux/slice/userSlide';
 import { IUser } from '@/types/backend';
 import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import { ActionType, ProColumns } from '@ant-design/pro-components';
@@ -7,10 +8,7 @@ import { useState, useRef } from 'react';
 import dayjs from 'dayjs';
 import { callDeleteUser } from '@/config/api';
 import queryString from 'query-string';
-import { ALL_PERMISSIONS } from '@/config/permissions';
-import { Access } from '@/components/shared';
 import { DataTable } from '@/components/client/data-table';
-import { fetchUser } from '@/redux/slice/userSlide';
 import { ModalUser, ViewDetailUser } from '@/components/admin/user';
 
 export const UserPage = () => {
@@ -101,39 +99,35 @@ export const UserPage = () => {
       width: 50,
       render: (_value, entity, _index, _action) => (
         <Space>
-          <Access permission={ALL_PERMISSIONS.USERS.UPDATE} hideChildren>
-            <EditOutlined
-              style={{
-                fontSize: 20,
-                color: '#ffa500',
-              }}
-              type=""
-              onClick={() => {
-                setOpenModal(true);
-                setDataInit(entity);
-              }}
-            />
-          </Access>
+          <EditOutlined
+            style={{
+              fontSize: 20,
+              color: '#ffa500',
+            }}
+            type=""
+            onClick={() => {
+              setOpenModal(true);
+              setDataInit(entity);
+            }}
+          />
 
-          <Access permission={ALL_PERMISSIONS.USERS.DELETE} hideChildren>
-            <Popconfirm
-              placement="leftTop"
-              title={'Xác nhận xóa user'}
-              description={'Bạn có chắc chắn muốn xóa user này ?'}
-              onConfirm={() => handleDeleteUser(entity._id)}
-              okText="Xác nhận"
-              cancelText="Hủy"
-            >
-              <span style={{ cursor: 'pointer', margin: '0 10px' }}>
-                <DeleteOutlined
-                  style={{
-                    fontSize: 20,
-                    color: '#ff4d4f',
-                  }}
-                />
-              </span>
-            </Popconfirm>
-          </Access>
+          <Popconfirm
+            placement="leftTop"
+            title={'Xác nhận xóa user'}
+            description={'Bạn có chắc chắn muốn xóa user này ?'}
+            onConfirm={() => handleDeleteUser(entity._id)}
+            okText="Xác nhận"
+            cancelText="Hủy"
+          >
+            <span style={{ cursor: 'pointer', margin: '0 10px' }}>
+              <DeleteOutlined
+                style={{
+                  fontSize: 20,
+                  color: '#ff4d4f',
+                }}
+              />
+            </span>
+          </Popconfirm>
         </Space>
       ),
     },
@@ -168,54 +162,51 @@ export const UserPage = () => {
     } else {
       temp = `${temp}&${sortBy}`;
     }
-    temp += '&populate=role&fields=role._id, role.name';
 
     return temp;
   };
 
   return (
     <div>
-      <Access permission={ALL_PERMISSIONS.USERS.GET_PAGINATE}>
-        <DataTable<IUser>
-          actionRef={tableRef}
-          headerTitle="Danh sách Users"
-          rowKey="_id"
-          loading={isFetching}
-          columns={columns}
-          dataSource={users}
-          request={async (params, sort, filter): Promise<any> => {
-            const query = buildQuery(params, sort, filter);
-            dispatch(fetchUser({ query }));
-          }}
-          scroll={{ x: true }}
-          pagination={{
-            current: meta.current,
-            pageSize: meta.pageSize,
-            showSizeChanger: true,
-            total: meta.total,
-            showTotal: (total, range) => {
-              return (
-                <div>
-                  {' '}
-                  {range[0]}-{range[1]} trên {total} rows
-                </div>
-              );
-            },
-          }}
-          rowSelection={false}
-          toolBarRender={(_action, _rows): any => {
+      <DataTable<IUser>
+        actionRef={tableRef}
+        headerTitle="Danh sách Users"
+        rowKey="_id"
+        loading={isFetching}
+        columns={columns}
+        dataSource={users}
+        request={async (params, sort, filter): Promise<any> => {
+          const query = buildQuery(params, sort, filter);
+          dispatch(fetchUser({ query }));
+        }}
+        scroll={{ x: true }}
+        pagination={{
+          current: meta.current,
+          pageSize: meta.pageSize,
+          showSizeChanger: true,
+          total: meta.total,
+          showTotal: (total, range) => {
             return (
-              <Button
-                icon={<PlusOutlined />}
-                type="primary"
-                onClick={() => setOpenModal(true)}
-              >
-                Thêm mới
-              </Button>
+              <div>
+                {' '}
+                {range[0]}-{range[1]} trên {total} rows
+              </div>
             );
-          }}
-        />
-      </Access>
+          },
+        }}
+        rowSelection={false}
+        toolBarRender={(_action, _rows): any => {
+          return (
+            <Button
+              icon={<PlusOutlined />}
+              type="primary"
+              onClick={() => setOpenModal(true)}
+            >
+              Thêm mới
+            </Button>
+          );
+        }}
+      />
       <ModalUser
         openModal={openModal}
         setOpenModal={setOpenModal}

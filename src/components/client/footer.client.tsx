@@ -1,5 +1,7 @@
-const Footer = () => {
-  return <footer style={{ padding: 15, textAlign: 'center' }}></footer>;
+export const Footer = () => {
+  return (
+    <footer>
+      <div>asfasfasf</div>
+    </footer>
+  );
 };
-
-export default Footer;

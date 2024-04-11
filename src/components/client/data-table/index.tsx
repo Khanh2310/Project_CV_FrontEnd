@@ -4,6 +4,7 @@ import {
   ProTableProps,
 } from '@ant-design/pro-components';
 import vi_VN from 'antd/locale/vi_VN';
+import enUS from 'antd/lib/locale/en_US';
 import { ConfigProvider } from 'antd';
 
 export const DataTable = <
@@ -16,6 +17,7 @@ export const DataTable = <
   dataSource,
   postData,
   pagination,
+  // sticky = { offsetHeader: 50 },
   loading,
   rowKey = (record) => record.id,
   scroll,

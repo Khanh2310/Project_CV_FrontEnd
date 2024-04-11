@@ -3,6 +3,7 @@ import {
   Divider,
   Form,
   Input,
+  Row,
   Select,
   message,
   notification,
@@ -57,9 +58,14 @@ export const RegisterPage = () => {
               </h2>
               <Divider />
             </div>
-            <Form<IUser> name="basic" onFinish={onFinish} autoComplete="off">
+            <Form<IUser>
+              name="basic"
+              // style={{ maxWidth: 600, margin: '0 auto' }}
+              onFinish={onFinish}
+              autoComplete="off"
+            >
               <Form.Item
-                labelCol={{ span: 24 }}
+                labelCol={{ span: 24 }} //whole column
                 label="Họ tên"
                 name="name"
                 rules={[
@@ -70,7 +76,7 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }}
+                labelCol={{ span: 24 }} //whole column
                 label="Email"
                 name="email"
                 rules={[
@@ -81,7 +87,7 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }}
+                labelCol={{ span: 24 }} //whole column
                 label="Mật khẩu"
                 name="password"
                 rules={[
@@ -91,7 +97,7 @@ export const RegisterPage = () => {
                 <Input.Password />
               </Form.Item>
               <Form.Item
-                labelCol={{ span: 24 }}
+                labelCol={{ span: 24 }} //whole column
                 label="Tuổi"
                 name="age"
                 rules={[
@@ -102,14 +108,18 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }}
+                labelCol={{ span: 24 }} //whole column
                 name="gender"
                 label="Giới tính"
                 rules={[
                   { required: true, message: 'Giới tính không được để trống!' },
                 ]}
               >
-                <Select allowClear>
+                <Select
+                  // placeholder="Select a option and change input text above"
+                  // onChange={onGenderChange}
+                  allowClear
+                >
                   <Option value="male">Nam</Option>
                   <Option value="female">Nữ</Option>
                   <Option value="other">Khác</Option>
@@ -117,7 +127,7 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }}
+                labelCol={{ span: 24 }} //whole column
                 label="Địa chỉ"
                 name="address"
                 rules={[
@@ -127,7 +137,9 @@ export const RegisterPage = () => {
                 <Input />
               </Form.Item>
 
-              <Form.Item>
+              <Form.Item
+              // wrapperCol={{ offset: 6, span: 16 }}
+              >
                 <Button type="primary" htmlType="submit" loading={isSubmit}>
                   Đăng ký
                 </Button>

@@ -1,6 +1,5 @@
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { setRefreshTokenAction } from '@/redux/slice/accountSlide';
-
 import { message } from 'antd';
 import { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -19,6 +18,7 @@ export const LayoutApp = (props: IProps) => {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
+  //handle refresh token error
   useEffect(() => {
     if (isRefreshToken === true) {
       localStorage.removeItem('access_token');
@@ -26,7 +26,6 @@ export const LayoutApp = (props: IProps) => {
       dispatch(setRefreshTokenAction({ status: false, message: '' }));
       navigate('/login');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRefreshToken]);
 
   return <>{props.children}</>;
