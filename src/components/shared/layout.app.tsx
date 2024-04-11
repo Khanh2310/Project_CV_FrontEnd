@@ -26,6 +26,7 @@ export const LayoutApp = (props: IProps) => {
       dispatch(setRefreshTokenAction({ status: false, message: '' }));
       navigate('/login');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isRefreshToken]);
 
   return <>{props.children}</>;

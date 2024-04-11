@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { FaReact } from 'react-icons/fa';
 import { VscSearchFuzzy } from 'react-icons/vsc';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { Divider, Badge, Drawer, message, Avatar, Popover, Empty } from 'antd';
 import { Dropdown, Space } from 'antd';
 import { useNavigate } from 'react-router';
@@ -16,7 +17,9 @@ export const Header = (props: any) => {
   );
   const user = useAppSelector((state) => state.account.user);
   const navigate = useNavigate();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [showManageAccount, setShowManageAccount] = useState(false);
 
   const handleLogout = async () => {

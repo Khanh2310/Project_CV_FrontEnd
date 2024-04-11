@@ -3,6 +3,7 @@ import {
   Divider,
   Form,
   Input,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   Row,
   Select,
   message,
@@ -58,14 +59,9 @@ export const RegisterPage = () => {
               </h2>
               <Divider />
             </div>
-            <Form<IUser>
-              name="basic"
-              // style={{ maxWidth: 600, margin: '0 auto' }}
-              onFinish={onFinish}
-              autoComplete="off"
-            >
+            <Form<IUser> name="basic" onFinish={onFinish} autoComplete="off">
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Họ tên"
                 name="name"
                 rules={[
@@ -76,7 +72,7 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Email"
                 name="email"
                 rules={[
@@ -87,7 +83,7 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Mật khẩu"
                 name="password"
                 rules={[
@@ -97,7 +93,7 @@ export const RegisterPage = () => {
                 <Input.Password />
               </Form.Item>
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Tuổi"
                 name="age"
                 rules={[
@@ -108,18 +104,14 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 name="gender"
                 label="Giới tính"
                 rules={[
                   { required: true, message: 'Giới tính không được để trống!' },
                 ]}
               >
-                <Select
-                  // placeholder="Select a option and change input text above"
-                  // onChange={onGenderChange}
-                  allowClear
-                >
+                <Select allowClear>
                   <Option value="male">Nam</Option>
                   <Option value="female">Nữ</Option>
                   <Option value="other">Khác</Option>
@@ -137,9 +129,7 @@ export const RegisterPage = () => {
                 <Input />
               </Form.Item>
 
-              <Form.Item
-              // wrapperCol={{ offset: 6, span: 16 }}
-              >
+              <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isSubmit}>
                   Đăng ký
                 </Button>

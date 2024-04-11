@@ -34,6 +34,7 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isLoading = useAppSelector((state) => state.account.isLoading);
 
   useEffect(() => {
@@ -43,6 +44,7 @@ export default function App() {
     )
       return;
     dispatch(fetchAccount());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const router = createBrowserRouter([

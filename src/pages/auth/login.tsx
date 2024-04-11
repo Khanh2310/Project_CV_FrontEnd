@@ -1,5 +1,5 @@
 import { Button, Divider, Form, Input, message, notification } from 'antd';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { callLogin } from 'config/api';
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,14 +7,11 @@ import { setUserLoginInfo } from '@/redux/slice/accountSlide';
 import styles from 'styles/auth.module.scss';
 
 export const LoginPage = () => {
-  const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    //đã login => redirect to '/'
     if (localStorage.getItem('access_token')) {
-      // navigate('/');
       window.location.href = '/';
     }
   }, []);
@@ -52,14 +49,9 @@ export const LoginPage = () => {
               </h2>
               <Divider />
             </div>
-            <Form
-              name="basic"
-              // style={{ maxWidth: 600, margin: '0 auto' }}
-              onFinish={onFinish}
-              autoComplete="off"
-            >
+            <Form name="basic" onFinish={onFinish} autoComplete="off">
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Email"
                 name="username"
                 rules={[
@@ -70,7 +62,7 @@ export const LoginPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Mật khẩu"
                 name="password"
                 rules={[
@@ -80,9 +72,7 @@ export const LoginPage = () => {
                 <Input.Password />
               </Form.Item>
 
-              <Form.Item
-              // wrapperCol={{ offset: 6, span: 16 }}
-              >
+              <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isSubmit}>
                   Đăng nhập
                 </Button>
