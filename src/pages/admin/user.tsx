@@ -47,6 +47,7 @@ export const UserPage = () => {
       title: 'Id',
       dataIndex: '_id',
       width: 250,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return (
           <a
@@ -78,6 +79,7 @@ export const UserPage = () => {
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
@@ -88,6 +90,7 @@ export const UserPage = () => {
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
@@ -97,6 +100,7 @@ export const UserPage = () => {
       title: 'Actions',
       hideInSearch: true,
       width: 50,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (_value, entity, _index, _action) => (
         <Space>
           <EditOutlined
@@ -133,6 +137,7 @@ export const UserPage = () => {
     },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const buildQuery = (params: any, sort: any, filter: any) => {
     const clone = { ...params };
     if (clone.name) clone.name = `/${clone.name}/i`;
@@ -195,6 +200,7 @@ export const UserPage = () => {
           },
         }}
         rowSelection={false}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         toolBarRender={(_action, _rows): any => {
           return (
             <Button
