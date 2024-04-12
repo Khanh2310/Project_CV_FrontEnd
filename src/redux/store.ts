@@ -2,12 +2,14 @@ import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
 import accountReducer from './slice/accountSlide';
 import companyReducer from './slice/companySlide';
 import userReducer from './slice/userSlide';
+import jobReducer from './slice/jobSlide';
 
 export const store = configureStore({
   reducer: {
     account: accountReducer,
     company: companyReducer,
     user: userReducer,
+    job: jobReducer,
   },
 });
 

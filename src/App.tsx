@@ -1,32 +1,52 @@
-import { useEffect, useState } from 'react';
-import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-
-import 'styles/app.module.scss';
-
-import { fetchAccount } from './redux/slice/accountSlide';
-import { JobPage } from './pages/admin/job';
-import { Footer, Header } from './components/client';
-import { LayoutApp, NotFound } from './components/shared';
-import { HomePage } from './pages/home';
-import { LayoutAdmin } from './components/admin';
-import { ProtectedRoute } from './components/shared/protected-route';
+import { useEffect, useRef, useState } from 'react';
 import {
-  CompanyPage,
-  DashboardPage,
-  PermissionPage,
-  ResumePage,
-  RolePage,
-  UserPage,
-} from './pages/admin';
-import { LoginPage, RegisterPage } from './pages/auth';
+  createBrowserRouter,
+  Outlet,
+  RouterProvider,
+  useLocation,
+} from 'react-router-dom';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import LoginPage from 'pages/auth/login';
+import RegisterPage from 'pages/auth/register';
+import LayoutAdmin from 'components/admin/layout.admin';
+import Header from 'components/client/header.client';
+import Footer from 'components/client/footer.client';
+import HomePage from 'pages/home';
+import styles from 'styles/app.module.scss';
+import DashboardPage from './pages/admin/dashboard';
+import CompanyPage from './pages/admin/company';
+import UserPage from './pages/admin/user';
+import { fetchAccount } from './redux/slice/accountSlide';
+import JobPage from './pages/admin/job';
+import ViewUpsertJob from './components/admin/job/upsert.job';
+import ClientJobPage from './pages/job';
+import ClientJobDetailPage from './pages/job/detail';
+import { PermissionPage } from './pages/admin/permission';
+import NotFound from './components/shared/not.found';
+import { RolePage } from './pages/admin/role';
+import { ResumePage } from './pages/admin/resume';
+import { ClientCompanyPage } from './pages/company';
+import { ClientCompanyDetailPage } from './pages/company/detail';
+import LayoutApp from './components/shared/layout.app';
+import ProtectedRoute from './components/shared/protected-route';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const location = useLocation();
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (rootRef && rootRef.current) {
+      rootRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  }, [location]);
+
   return (
-    <div className="layout-app">
+    <div className="layout-app" ref={rootRef}>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <Outlet context={[searchTerm, setSearchTerm]} />
+      <div className={styles['content-app']}>
+        <Outlet context={[searchTerm, setSearchTerm]} />
+      </div>
       <Footer />
     </div>
   );
@@ -34,7 +54,6 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isLoading = useAppSelector((state) => state.account.isLoading);
 
   useEffect(() => {
@@ -44,7 +63,6 @@ export default function App() {
     )
       return;
     dispatch(fetchAccount());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const router = createBrowserRouter([
@@ -56,7 +74,13 @@ export default function App() {
         </LayoutApp>
       ),
       errorElement: <NotFound />,
-      children: [{ index: true, element: <HomePage /> }],
+      children: [
+        { index: true, element: <HomePage /> },
+        { path: 'job', element: <ClientJobPage /> },
+        { path: 'job/:id', element: <ClientJobDetailPage /> },
+        { path: 'company', element: <ClientCompanyPage /> },
+        { path: 'company/:id', element: <ClientCompanyDetailPage /> },
+      ],
     },
 
     {
@@ -95,11 +119,25 @@ export default function App() {
 
         {
           path: 'job',
-          element: (
-            <ProtectedRoute>
-              <JobPage />
-            </ProtectedRoute>
-          ),
+          children: [
+            {
+              index: true,
+              element: (
+                <ProtectedRoute>
+                  {' '}
+                  <JobPage />
+                </ProtectedRoute>
+              ),
+            },
+            {
+              path: 'upsert',
+              element: (
+                <ProtectedRoute>
+                  <ViewUpsertJob />
+                </ProtectedRoute>
+              ),
+            },
+          ],
         },
 
         {
@@ -142,16 +180,7 @@ export default function App() {
 
   return (
     <>
-      {
-        // isLoading === false
-        //   || window.location.pathname === '/login'
-        //   || window.location.pathname === '/register'
-        //   || window.location.pathname === '/'
-        //   ?
-        <RouterProvider router={router} />
-        // :
-        // <Loading />
-      }
+      <RouterProvider router={router} />
     </>
   );
 }

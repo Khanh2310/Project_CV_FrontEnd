@@ -3,8 +3,6 @@ import {
   Divider,
   Form,
   Input,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  Row,
   Select,
   message,
   notification,
@@ -16,7 +14,7 @@ import styles from 'styles/auth.module.scss';
 import { IUser } from '@/types/backend';
 const { Option } = Select;
 
-export const RegisterPage = () => {
+const RegisterPage = () => {
   const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
 
@@ -119,7 +117,7 @@ export const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Địa chỉ"
                 name="address"
                 rules={[
@@ -149,3 +147,5 @@ export const RegisterPage = () => {
     </div>
   );
 };
+
+export default RegisterPage;

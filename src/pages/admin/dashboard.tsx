@@ -1,7 +1,7 @@
 import { Card, Col, Row, Statistic } from 'antd';
 import CountUp from 'react-countup';
 
-export const DashboardPage = () => {
+const DashboardPage = () => {
   const formatter = (value: number | string) => {
     return <CountUp end={Number(value)} separator="," />;
   };
@@ -38,3 +38,5 @@ export const DashboardPage = () => {
     </Row>
   );
 };
+
+export default DashboardPage;

@@ -5,6 +5,7 @@ import {
   IUser,
   IModelPaginate,
   IGetAccount,
+  IJob,
 } from '@/types/backend';
 import axios from 'config/axios-customize';
 
@@ -50,18 +51,37 @@ export const callLogout = () => {
 };
 
 /**
+ * Upload single file
+ */
+export const callUploadSingleFile = (file: any, folderType: string) => {
+  const bodyFormData = new FormData();
+  bodyFormData.append('fileUpload', file);
+  return axios<IBackendRes<{ fileName: string }>>({
+    method: 'post',
+    url: '/v1/api/files/upload',
+    data: bodyFormData,
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      folder_type: folderType,
+    },
+  });
+};
+
+/**
  * 
 Module Company
  */
 export const callCreateCompany = (
   name: string,
   address: string,
-  description: string
+  description: string,
+  logo: string
 ) => {
   return axios.post<IBackendRes<ICompany>>('/v1/api/companies', {
     name,
     address,
     description,
+    logo,
   });
 };
 
@@ -69,12 +89,14 @@ export const callUpdateCompany = (
   id: string,
   name: string,
   address: string,
-  description: string
+  description: string,
+  logo: string
 ) => {
   return axios.patch<IBackendRes<ICompany>>(`/v1/api/companies/${id}`, {
     name,
     address,
     description,
+    logo,
   });
 };
 
@@ -108,4 +130,28 @@ export const callFetchUser = (query: string) => {
   return axios.get<IBackendRes<IModelPaginate<IUser>>>(
     `/v1/api/users?${query}`
   );
+};
+
+/**
+ * 
+Module Job
+ */
+export const callCreateJob = (job: IJob) => {
+  return axios.post<IBackendRes<IJob>>('/v1/api/jobs', { ...job });
+};
+
+export const callUpdateJob = (job: IJob, id: string) => {
+  return axios.patch<IBackendRes<IJob>>(`/v1/api/jobs/${id}`, { ...job });
+};
+
+export const callDeleteJob = (id: string) => {
+  return axios.delete<IBackendRes<IJob>>(`/v1/api/jobs/${id}`);
+};
+
+export const callFetchJob = (query: string) => {
+  return axios.get<IBackendRes<IModelPaginate<IJob>>>(`/v1/api/jobs?${query}`);
+};
+
+export const callFetchJobById = (id: string) => {
+  return axios.get<IBackendRes<IJob>>(`/v1/api/jobs/${id}`);
 };

@@ -8,35 +8,33 @@ import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
   AliwangwangOutlined,
+  LogoutOutlined,
+  BugOutlined,
+  ScheduleOutlined,
 } from '@ant-design/icons';
-import { Layout, Menu, Dropdown, Space, message, Button } from 'antd';
+import { Layout, Menu, Dropdown, Space, message, Avatar, Button } from 'antd';
 import { Outlet, useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import { callLogout } from 'config/api';
-// import { doLogoutAction } from '@/redux/account/accountSlice';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { isMobile } from 'react-device-detect';
-
 import type { MenuProps } from 'antd';
+import { setLogoutAction } from '@/redux/slice/accountSlide';
 
 const { Content, Sider } = Layout;
 
-export const LayoutAdmin = () => {
+const LayoutAdmin = () => {
   const [collapsed, setCollapsed] = useState(false);
   const [activeMenu, setActiveMenu] = useState('dashboard');
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const user = useAppSelector((state) => state.account.user);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const [showManageAccount, setShowManageAccount] = useState(false);
-
   const navigate = useNavigate();
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const dispatch = useAppDispatch();
 
   const handleLogout = async () => {
     const res = await callLogout();
     if (res && res.data) {
+      dispatch(setLogoutAction({}));
       message.success('Đăng xuất thành công');
       navigate('/');
     }
@@ -59,6 +57,11 @@ export const LayoutAdmin = () => {
       icon: <UserOutlined />,
     },
     {
+      label: <Link to="/admin/job">Job</Link>,
+      key: 'job',
+      icon: <ScheduleOutlined />,
+    },
+    {
       label: <Link to="/admin/resume">Resume</Link>,
       key: 'resume',
       icon: <AliwangwangOutlined />,
@@ -75,18 +78,19 @@ export const LayoutAdmin = () => {
     },
   ];
 
-  const itemsDropdown = [
-    {
+  if (isMobile) {
+    items.push({
       label: (
-        <label
-          style={{ cursor: 'pointer' }}
-          onClick={() => setShowManageAccount(true)}
-        >
-          Quản lý tài khoản
+        <label style={{ cursor: 'pointer' }} onClick={() => handleLogout()}>
+          Đăng xuất
         </label>
       ),
-      key: 'account',
-    },
+      key: 'logout',
+      icon: <LogoutOutlined />,
+    });
+  }
+
+  const itemsDropdown = [
     {
       label: <Link to={'/'}>Trang chủ</Link>,
       key: 'home',
@@ -112,7 +116,7 @@ export const LayoutAdmin = () => {
             onCollapse={(value) => setCollapsed(value)}
           >
             <div style={{ height: 32, margin: 16, textAlign: 'center' }}>
-              Admin
+              <BugOutlined /> ADMIN
             </div>
             <Menu
               defaultSelectedKeys={[activeMenu]}
@@ -132,7 +136,14 @@ export const LayoutAdmin = () => {
 
         <Layout>
           {!isMobile && (
-            <div className="admin-header">
+            <div
+              className="admin-header"
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                marginRight: 20,
+              }}
+            >
               <Button
                 type="text"
                 icon={
@@ -147,8 +158,15 @@ export const LayoutAdmin = () => {
                   height: 64,
                 }}
               />
+
               <Dropdown menu={{ items: itemsDropdown }} trigger={['click']}>
-                <Space style={{ cursor: 'pointer' }}>ádfasdfasdf</Space>
+                <Space style={{ cursor: 'pointer' }}>
+                  Welcome {user?.name}
+                  <Avatar>
+                    {' '}
+                    {user?.name?.substring(0, 2)?.toUpperCase()}{' '}
+                  </Avatar>
+                </Space>
               </Dropdown>
             </div>
           )}
@@ -160,3 +178,5 @@ export const LayoutAdmin = () => {
     </>
   );
 };
+
+export default LayoutAdmin;

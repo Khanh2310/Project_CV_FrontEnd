@@ -8,7 +8,7 @@ interface IProps {
   dataInit: IUser | null;
   setDataInit: (v: any) => void;
 }
-export const ViewDetailUser = (props: IProps) => {
+const ViewDetailUser = (props: IProps) => {
   const { onClose, open, dataInit, setDataInit } = props;
 
   return (
@@ -62,3 +62,5 @@ export const ViewDetailUser = (props: IProps) => {
     </>
   );
 };
+
+export default ViewDetailUser;

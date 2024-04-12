@@ -20,13 +20,13 @@ interface IProps {
   reloadTable: () => void;
 }
 
-interface ICompanySelect {
+export interface ICompanySelect {
   label: string;
   value: string;
   key?: string;
 }
 
-export const ModalUser = (props: IProps) => {
+const ModalUser = (props: IProps) => {
   const { openModal, setOpenModal, reloadTable, dataInit, setDataInit } = props;
   const [companies, setCompanies] = useState<ICompanySelect[]>([]);
   const [form] = Form.useForm();
@@ -118,7 +118,7 @@ export const ModalUser = (props: IProps) => {
     );
     if (res && res.data) {
       const list = res.data.result;
-      const temp = list.map((item: any) => {
+      const temp = list.map((item) => {
         return {
           label: item.name as string,
           value: item._id as string,
@@ -254,3 +254,5 @@ export const ModalUser = (props: IProps) => {
     </>
   );
 };
+
+export default ModalUser;

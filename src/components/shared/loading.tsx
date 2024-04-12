@@ -1,6 +1,6 @@
 import HashLoader from 'react-spinners/HashLoader';
 
-export const Loading = () => {
+const Loading = () => {
   const style: React.CSSProperties = {
     position: 'fixed',
     top: '50%',
@@ -14,3 +14,5 @@ export const Loading = () => {
     </div>
   );
 };
+
+export default Loading;

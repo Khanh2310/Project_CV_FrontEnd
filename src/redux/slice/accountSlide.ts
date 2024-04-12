@@ -1,8 +1,7 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import axios from '@/config/axios-customize';
 import { callFetchAccount } from '@/config/api';
 
+// First, create the thunk
 export const fetchAccount = createAsyncThunk(
   'account/fetchAccount',
   async () => {
@@ -12,8 +11,7 @@ export const fetchAccount = createAsyncThunk(
 );
 
 const initialState = {
-  // isAuthenticated: false,
-  isAuthenticated: true,
+  isAuthenticated: false,
   isLoading: true,
   isRefreshToken: false,
   errorRefreshToken: '',
@@ -30,7 +28,9 @@ const initialState = {
 export const accountSlide = createSlice({
   name: 'account',
   initialState,
+  // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
+    // Use the PayloadAction type to declare the contents of `action.payload`
     setActiveMenu: (state, action) => {
       state.activeMenu = action.payload;
     },
@@ -42,7 +42,6 @@ export const accountSlide = createSlice({
         ...action.payload,
       };
     },
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setLogoutAction: (state, action) => {
       localStorage.removeItem('access_token');
       state.isAuthenticated = false;
@@ -60,6 +59,7 @@ export const accountSlide = createSlice({
     },
   },
   extraReducers: (builder) => {
+    // Add reducers for additional action types here, and handle loading state as needed
     builder.addCase(fetchAccount.pending, (state, action) => {
       if (action.payload) {
         state.isAuthenticated = false;
@@ -71,7 +71,7 @@ export const accountSlide = createSlice({
       if (action.payload) {
         state.isAuthenticated = true;
         state.isLoading = false;
-        state.user = { ...state.user, ...action.payload.user };
+        state.user = { ...state.user, ...action?.payload?.user };
       }
     });
 

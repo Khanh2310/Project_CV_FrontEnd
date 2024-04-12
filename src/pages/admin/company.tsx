@@ -1,4 +1,5 @@
 import ModalCompany from '@/components/admin/company/modal.company';
+import DataTable from '@/components/client/data-table';
 import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { fetchCompany } from '@/redux/slice/companySlide';
 import { ICompany } from '@/types/backend';
@@ -9,9 +10,8 @@ import { useState, useRef } from 'react';
 import dayjs from 'dayjs';
 import { callDeleteCompany } from '@/config/api';
 import queryString from 'query-string';
-import { DataTable } from '@/components/client/data-table';
 
-export const CompanyPage = () => {
+const CompanyPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
   const [dataInit, setDataInit] = useState<ICompany | null>(null);
 
@@ -50,12 +50,12 @@ export const CompanyPage = () => {
       render: (text, record, index) => {
         return <>{index + 1 + (meta.current - 1) * meta.pageSize}</>;
       },
+      hideInSearch: true,
     },
     {
       title: 'Id',
       dataIndex: '_id',
       width: 250,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <span>{record._id}</span>;
       },
@@ -77,7 +77,6 @@ export const CompanyPage = () => {
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
@@ -88,7 +87,6 @@ export const CompanyPage = () => {
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
@@ -98,7 +96,6 @@ export const CompanyPage = () => {
       title: 'Actions',
       hideInSearch: true,
       width: 50,
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (_value, entity, _index, _action) => (
         <Space>
           <EditOutlined
@@ -135,7 +132,6 @@ export const CompanyPage = () => {
     },
   ];
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const buildQuery = (params: any, sort: any, filter: any) => {
     const clone = { ...params };
     if (clone.name) clone.name = `/${clone.name}/i`;
@@ -198,7 +194,6 @@ export const CompanyPage = () => {
           },
         }}
         rowSelection={false}
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         toolBarRender={(_action, _rows): any => {
           return (
             <Button
@@ -221,3 +216,5 @@ export const CompanyPage = () => {
     </div>
   );
 };
+
+export default CompanyPage;

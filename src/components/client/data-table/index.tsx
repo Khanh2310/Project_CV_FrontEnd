@@ -4,10 +4,11 @@ import {
   ProTableProps,
 } from '@ant-design/pro-components';
 import vi_VN from 'antd/locale/vi_VN';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import enUS from 'antd/lib/locale/en_US';
 import { ConfigProvider } from 'antd';
 
-export const DataTable = <
+const DataTable = <
   T extends Record<string, any>,
   U extends ParamsType = ParamsType,
   ValueType = 'text'
@@ -57,3 +58,5 @@ export const DataTable = <
     </ConfigProvider>
   );
 };
+
+export default DataTable;

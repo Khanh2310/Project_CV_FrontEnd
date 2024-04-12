@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { callFetchUser } from '@/config/api';
-import { IUser } from '@/types/backend';
+import { callFetchJob } from '@/config/api';
+import { IJob } from '@/types/backend';
 
 interface IState {
   isFetching: boolean;
@@ -10,13 +10,13 @@ interface IState {
     pages: number;
     total: number;
   };
-  result: IUser[];
+  result: IJob[];
 }
 // First, create the thunk
-export const fetchUser = createAsyncThunk(
-  'user/fetchUser',
+export const fetchJob = createAsyncThunk(
+  'job/fetchJob',
   async ({ query }: { query: string }) => {
-    const response = await callFetchUser(query);
+    const response = await callFetchJob(query);
     return response;
   }
 );
@@ -32,8 +32,8 @@ const initialState: IState = {
   result: [],
 };
 
-export const userSlide = createSlice({
-  name: 'user',
+export const jobSlide = createSlice({
+  name: 'job',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -44,19 +44,19 @@ export const userSlide = createSlice({
   },
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
-    builder.addCase(fetchUser.pending, (state, action) => {
+    builder.addCase(fetchJob.pending, (state, action) => {
       state.isFetching = true;
       // Add user to the state array
       // state.courseOrder = action.payload;
     });
 
-    builder.addCase(fetchUser.rejected, (state, action) => {
+    builder.addCase(fetchJob.rejected, (state, action) => {
       state.isFetching = false;
       // Add user to the state array
       // state.courseOrder = action.payload;
     });
 
-    builder.addCase(fetchUser.fulfilled, (state, action) => {
+    builder.addCase(fetchJob.fulfilled, (state, action) => {
       if (action.payload && action.payload.data) {
         state.isFetching = false;
         state.meta = action.payload.data.meta;
@@ -69,6 +69,6 @@ export const userSlide = createSlice({
   },
 });
 
-export const { setActiveMenu } = userSlide.actions;
+export const { setActiveMenu } = jobSlide.actions;
 
-export default userSlide.reducer;
+export default jobSlide.reducer;

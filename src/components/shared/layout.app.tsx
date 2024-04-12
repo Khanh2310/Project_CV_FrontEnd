@@ -8,7 +8,7 @@ interface IProps {
   children: React.ReactNode;
 }
 
-export const LayoutApp = (props: IProps) => {
+const LayoutApp = (props: IProps) => {
   const isRefreshToken = useAppSelector(
     (state) => state.account.isRefreshToken
   );
@@ -31,3 +31,5 @@ export const LayoutApp = (props: IProps) => {
 
   return <>{props.children}</>;
 };
+
+export default LayoutApp;

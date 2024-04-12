@@ -7,6 +7,10 @@ interface AccessTokenResponse {
   access_token: string;
 }
 
+/**
+ * Creates an initial 'axios' instance with custom settings.
+ */
+
 const instance = axiosClient.create({
   baseURL: import.meta.env.VITE_BACKEND_URL as string,
   withCredentials: true,
@@ -25,7 +29,7 @@ const handleRefreshToken = async (): Promise<string | null> => {
   });
 };
 
-instance.interceptors.request.use(function (config: any) {
+instance.interceptors.request.use(function (config) {
   if (
     typeof window !== 'undefined' &&
     window &&
@@ -42,9 +46,13 @@ instance.interceptors.request.use(function (config: any) {
   return config;
 });
 
+/**
+ * Handle all responses. It is possible to add handlers
+ * for requests, but it is omitted here for brevity.
+ */
 instance.interceptors.response.use(
-  (res: any) => res.data,
-  async (error: any) => {
+  (res) => res.data,
+  async (error) => {
     if (
       error.config &&
       error.response &&
@@ -65,7 +73,8 @@ instance.interceptors.response.use(
       error.config &&
       error.response &&
       +error.response.status === 400 &&
-      error.config.url === '/v1/api/auth/refresh'
+      error.config.url === '/v1/api/auth/refresh' &&
+      location.pathname.startsWith('/admin')
     ) {
       const message =
         error?.response?.data?.message ?? 'Có lỗi xảy ra, vui lòng login.';
@@ -76,5 +85,16 @@ instance.interceptors.response.use(
     return error?.response?.data ?? Promise.reject(error);
   }
 );
+
+/**
+ * Replaces main `axios` instance with the custom-one.
+ *
+ * @param cfg - Axios configuration object.
+ * @returns A promise object of a response of the HTTP request with the 'data' object already
+ * destructured.
+ */
+// const axios = <T>(cfg: AxiosRequestConfig) => instance.request<any, T>(cfg);
+
+// export default axios;
 
 export default instance;

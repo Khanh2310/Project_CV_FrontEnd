@@ -1,7 +1,7 @@
 import { Button, Result } from 'antd';
 import { useNavigate } from 'react-router-dom';
 
-export const NotPermitted = () => {
+const NotPermitted = () => {
   const navigate = useNavigate();
   return (
     <Result
@@ -16,3 +16,5 @@ export const NotPermitted = () => {
     />
   );
 };
+
+export default NotPermitted;
