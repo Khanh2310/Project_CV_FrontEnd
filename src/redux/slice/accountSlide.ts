@@ -1,9 +1,10 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { callFetchAccount } from '@/config/api';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "@/config/axios-customize";
+import { callFetchAccount } from "@/config/api";
 
 // First, create the thunk
 export const fetchAccount = createAsyncThunk(
-  'account/fetchAccount',
+  "account/fetchAccount",
   async () => {
     const response = await callFetchAccount();
     return response.data;
@@ -14,19 +15,19 @@ const initialState = {
   isAuthenticated: false,
   isLoading: true,
   isRefreshToken: false,
-  errorRefreshToken: '',
+  errorRefreshToken: "",
   user: {
-    email: '',
-    name: '',
-    phone: '',
-    _id: '',
-    role: 'ADMIN',
+    email: "",
+    name: "",
+    phone: "",
+    _id: "",
+    role: "ADMIN",
   },
-  activeMenu: 'home',
+  activeMenu: "home",
 };
 
 export const accountSlide = createSlice({
-  name: 'account',
+  name: "account",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
@@ -43,19 +44,19 @@ export const accountSlide = createSlice({
       };
     },
     setLogoutAction: (state, action) => {
-      localStorage.removeItem('access_token');
+      localStorage.removeItem("access_token");
       state.isAuthenticated = false;
       state.user = {
-        email: '',
-        phone: '',
-        _id: '',
-        role: '',
-        name: '',
+        email: "",
+        phone: "",
+        _id: "",
+        role: "",
+        name: "",
       };
     },
     setRefreshTokenAction: (state, action) => {
       state.isRefreshToken = action.payload?.status ?? false;
-      state.errorRefreshToken = action.payload?.message ?? '';
+      state.errorRefreshToken = action.payload?.message ?? "";
     },
   },
   extraReducers: (builder) => {

@@ -4,13 +4,13 @@ import {
   ProFormDigit,
   ProFormSelect,
   ProFormText,
-} from '@ant-design/pro-components';
-import { Col, Form, Row, message, notification } from 'antd';
-import { isMobile } from 'react-device-detect';
-import { useState, useEffect } from 'react';
-import { callCreateUser, callFetchCompany, callUpdateUser } from '@/config/api';
-import { IUser } from '@/types/backend';
-import { DebounceSelect } from './debouce.select';
+} from "@ant-design/pro-components";
+import { Col, Form, Row, message, notification } from "antd";
+import { isMobile } from "react-device-detect";
+import { useState, useEffect } from "react";
+import { callCreateUser, callFetchCompany, callUpdateUser } from "@/config/api";
+import { IUser } from "@/types/backend";
+import { DebounceSelect } from "./debouce.select";
 
 interface IProps {
   openModal: boolean;
@@ -66,12 +66,12 @@ const ModalUser = (props: IProps) => {
 
       const res = await callUpdateUser(user);
       if (res.data) {
-        message.success('Cập nhật user thành công');
+        message.success("Cập nhật user thành công");
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: "Có lỗi xảy ra",
           description: res.message,
         });
       }
@@ -92,12 +92,12 @@ const ModalUser = (props: IProps) => {
       };
       const res = await callCreateUser(user);
       if (res.data) {
-        message.success('Thêm mới user thành công');
+        message.success("Thêm mới user thành công");
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: "Có lỗi xảy ra",
           description: res.message,
         });
       }
@@ -131,7 +131,7 @@ const ModalUser = (props: IProps) => {
   return (
     <>
       <ModalForm
-        title={<>{dataInit?._id ? 'Cập nhật User' : 'Tạo mới User'}</>}
+        title={<>{dataInit?._id ? "Cập nhật User" : "Tạo mới User"}</>}
         open={openModal}
         modalProps={{
           onCancel: () => {
@@ -139,11 +139,11 @@ const ModalUser = (props: IProps) => {
           },
           afterClose: () => handleReset(),
           destroyOnClose: true,
-          width: isMobile ? '100%' : 900,
+          width: isMobile ? "100%" : 900,
           keyboard: false,
           maskClosable: false,
-          okText: <>{dataInit?._id ? 'Cập nhật' : 'Tạo mới'}</>,
-          cancelText: 'Hủy',
+          okText: <>{dataInit?._id ? "Cập nhật" : "Tạo mới"}</>,
+          cancelText: "Hủy",
         }}
         scrollToFirstError={true}
         preserve={false}
@@ -157,8 +157,8 @@ const ModalUser = (props: IProps) => {
               label="Email"
               name="email"
               rules={[
-                { required: true, message: 'Vui lòng không bỏ trống' },
-                { type: 'email', message: 'Vui lòng nhập email hợp lệ' },
+                { required: true, message: "Vui lòng không bỏ trống" },
+                { type: "email", message: "Vui lòng nhập email hợp lệ" },
               ]}
               placeholder="Nhập email"
             />
@@ -171,7 +171,7 @@ const ModalUser = (props: IProps) => {
               rules={[
                 {
                   required: dataInit?._id ? false : true,
-                  message: 'Vui lòng không bỏ trống',
+                  message: "Vui lòng không bỏ trống",
                 },
               ]}
               placeholder="Nhập password"
@@ -181,7 +181,7 @@ const ModalUser = (props: IProps) => {
             <ProFormText
               label="Tên hiển thị"
               name="name"
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
+              rules={[{ required: true, message: "Vui lòng không bỏ trống" }]}
               placeholder="Nhập tên hiển thị"
             />
           </Col>
@@ -189,7 +189,7 @@ const ModalUser = (props: IProps) => {
             <ProFormDigit
               label="Tuổi"
               name="age"
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
+              rules={[{ required: true, message: "Vui lòng không bỏ trống" }]}
               placeholder="Nhập nhập tuổi"
             />
           </Col>
@@ -198,12 +198,12 @@ const ModalUser = (props: IProps) => {
               name="gender"
               label="Giới Tính"
               valueEnum={{
-                male: 'Nam',
-                female: 'Nữ',
-                other: 'Khác',
+                male: "Nam",
+                female: "Nữ",
+                other: "Khác",
               }}
               placeholder="Please select a gender"
-              rules={[{ required: true, message: 'Vui lòng chọn giới tính!' }]}
+              rules={[{ required: true, message: "Vui lòng chọn giới tính!" }]}
             />
           </Col>
           <Col lg={6} md={6} sm={24} xs={24}>
@@ -211,19 +211,19 @@ const ModalUser = (props: IProps) => {
               name="role"
               label="Vai trò"
               valueEnum={{
-                ADMIN: 'ADMIN',
-                HR: 'HR',
-                USER: 'USER',
+                ADMIN: "ADMIN",
+                HR: "HR",
+                USER: "USER",
               }}
               placeholder="Please select a role"
-              rules={[{ required: true, message: 'Vui lòng chọn vai trò!' }]}
+              rules={[{ required: true, message: "Vui lòng chọn vai trò!" }]}
             />
           </Col>
           <Col lg={12} md={12} sm={24} xs={24}>
             <ProForm.Item
               name="company"
               label="Thuộc Công Ty"
-              rules={[{ required: true, message: 'Vui lòng chọn company!' }]}
+              rules={[{ required: true, message: "Vui lòng chọn company!" }]}
             >
               <DebounceSelect
                 allowClear
@@ -237,7 +237,7 @@ const ModalUser = (props: IProps) => {
                     setCompanies(newValue as ICompanySelect[]);
                   }
                 }}
-                style={{ width: '100%' }}
+                style={{ width: "100%" }}
               />
             </ProForm.Item>
           </Col>
@@ -245,7 +245,7 @@ const ModalUser = (props: IProps) => {
             <ProFormText
               label="Địa chỉ"
               name="address"
-              rules={[{ required: true, message: 'Vui lòng không bỏ trống' }]}
+              rules={[{ required: true, message: "Vui lòng không bỏ trống" }]}
               placeholder="Nhập địa chỉ"
             />
           </Col>

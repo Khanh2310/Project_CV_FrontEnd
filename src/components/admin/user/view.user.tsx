@@ -1,6 +1,6 @@
-import { IUser } from '@/types/backend';
-import { Badge, Descriptions, Drawer } from 'antd';
-import dayjs from 'dayjs';
+import { IUser } from "@/types/backend";
+import { Badge, Descriptions, Drawer } from "antd";
+import dayjs from "dayjs";
 
 interface IProps {
   onClose: (v: boolean) => void;
@@ -21,7 +21,7 @@ const ViewDetailUser = (props: IProps) => {
           setDataInit(null);
         }}
         open={open}
-        width={'40vw'}
+        width={"40vw"}
         maskClosable={false}
       >
         <Descriptions title="" bordered column={2} layout="vertical">
@@ -42,20 +42,20 @@ const ViewDetailUser = (props: IProps) => {
             {dataInit?.address}
           </Descriptions.Item>
           <Descriptions.Item label="Thông tin công ty" span={2}>
-            Id: {dataInit?.company?._id ?? '-'}
+            Id: {dataInit?.company?._id ?? "-"}
             <br />
-            Tên: {dataInit?.company?.name ?? '-'}
+            Tên: {dataInit?.company?.name ?? "-"}
             <br />
           </Descriptions.Item>
           <Descriptions.Item label="Ngày tạo">
             {dataInit && dataInit.createdAt
-              ? dayjs(dataInit.createdAt).format('DD-MM-YYYY HH:mm:ss')
-              : ''}
+              ? dayjs(dataInit.createdAt).format("DD-MM-YYYY HH:mm:ss")
+              : ""}
           </Descriptions.Item>
           <Descriptions.Item label="Ngày sửa">
             {dataInit && dataInit.updatedAt
-              ? dayjs(dataInit.updatedAt).format('DD-MM-YYYY HH:mm:ss')
-              : ''}
+              ? dayjs(dataInit.updatedAt).format("DD-MM-YYYY HH:mm:ss")
+              : ""}
           </Descriptions.Item>
         </Descriptions>
       </Drawer>

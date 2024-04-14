@@ -1,19 +1,27 @@
-import DataTable from '@/components/client/data-table';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { IJob } from '@/types/backend';
-import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import DataTable from "@/components/client/data-table";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { IJob } from "@/types/backend";
+import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
 import {
   ActionType,
   ProColumns,
   ProFormSelect,
-} from '@ant-design/pro-components';
-import { Button, Popconfirm, Space, Tag, message, notification } from 'antd';
-import { useRef } from 'react';
-import dayjs from 'dayjs';
-import { callDeleteJob } from '@/config/api';
-import queryString from 'query-string';
-import { useNavigate } from 'react-router-dom';
-import { fetchJob } from '@/redux/slice/jobSlide';
+} from "@ant-design/pro-components";
+import {
+  Button,
+  Popconfirm,
+  Select,
+  Space,
+  Tag,
+  message,
+  notification,
+} from "antd";
+import { useState, useRef } from "react";
+import dayjs from "dayjs";
+import { callDeleteJob } from "@/config/api";
+import queryString from "query-string";
+import { useNavigate } from "react-router-dom";
+import { fetchJob } from "@/redux/slice/jobSlide";
 
 const JobPage = () => {
   const tableRef = useRef<ActionType>();
@@ -28,11 +36,11 @@ const JobPage = () => {
     if (_id) {
       const res = await callDeleteJob(_id);
       if (res && res.data) {
-        message.success('Xóa Job thành công');
+        message.success("Xóa Job thành công");
         reloadTable();
       } else {
         notification.error({
-          message: 'Có lỗi xảy ra',
+          message: "Có lỗi xảy ra",
           description: res.message,
         });
       }
@@ -45,56 +53,56 @@ const JobPage = () => {
 
   const columns: ProColumns<IJob>[] = [
     {
-      title: 'STT',
-      key: 'index',
+      title: "STT",
+      key: "index",
       width: 50,
-      align: 'center',
+      align: "center",
       render: (text, record, index) => {
         return <>{index + 1 + (meta.current - 1) * meta.pageSize}</>;
       },
       hideInSearch: true,
     },
     {
-      title: 'Tên Job',
-      dataIndex: 'name',
+      title: "Tên Job",
+      dataIndex: "name",
       sorter: true,
     },
     {
-      title: 'Mức lương',
-      dataIndex: 'salary',
+      title: "Mức lương",
+      dataIndex: "salary",
       sorter: true,
       render(dom, entity, index, action, schema) {
-        const str = '' + entity.salary;
-        return <>{str?.replace(/\B(?=(\d{3})+(?!\d))/g, ',')} đ</>;
+        const str = "" + entity.salary;
+        return <>{str?.replace(/\B(?=(\d{3})+(?!\d))/g, ",")} đ</>;
       },
     },
     {
-      title: 'Level',
-      dataIndex: 'level',
+      title: "Level",
+      dataIndex: "level",
       renderFormItem: (item, props, form) => (
         <ProFormSelect
           showSearch
           mode="multiple"
           allowClear
           valueEnum={{
-            INTERN: 'INTERN',
-            FRESHER: 'FRESHER',
-            JUNIOR: 'JUNIOR',
-            MIDDLE: 'MIDDLE',
-            SENIOR: 'SENIOR',
+            INTERN: "INTERN",
+            FRESHER: "FRESHER",
+            JUNIOR: "JUNIOR",
+            MIDDLE: "MIDDLE",
+            SENIOR: "SENIOR",
           }}
           placeholder="Chọn level"
         />
       ),
     },
     {
-      title: 'Trạng thái',
-      dataIndex: 'isActive',
+      title: "Trạng thái",
+      dataIndex: "isActive",
       render(dom, entity, index, action, schema) {
         return (
           <>
-            <Tag color={entity.isActive ? 'lime' : 'red'}>
-              {entity.isActive ? 'ACTIVE' : 'INACTIVE'}
+            <Tag color={entity.isActive ? "lime" : "red"}>
+              {entity.isActive ? "ACTIVE" : "INACTIVE"}
             </Tag>
           </>
         );
@@ -103,27 +111,27 @@ const JobPage = () => {
     },
 
     {
-      title: 'CreatedAt',
-      dataIndex: 'createdAt',
+      title: "CreatedAt",
+      dataIndex: "createdAt",
       width: 200,
       sorter: true,
       render: (text, record, index, action) => {
-        return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
+        return <>{dayjs(record.createdAt).format("DD-MM-YYYY HH:mm:ss")}</>;
       },
       hideInSearch: true,
     },
     {
-      title: 'UpdatedAt',
-      dataIndex: 'updatedAt',
+      title: "UpdatedAt",
+      dataIndex: "updatedAt",
       width: 200,
       sorter: true,
       render: (text, record, index, action) => {
-        return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
+        return <>{dayjs(record.updatedAt).format("DD-MM-YYYY HH:mm:ss")}</>;
       },
       hideInSearch: true,
     },
     {
-      title: 'Actions',
+      title: "Actions",
       hideInSearch: true,
       width: 50,
       render: (_value, entity, _index, _action) => (
@@ -131,7 +139,7 @@ const JobPage = () => {
           <EditOutlined
             style={{
               fontSize: 20,
-              color: '#ffa500',
+              color: "#ffa500",
             }}
             type=""
             onClick={() => {
@@ -141,17 +149,17 @@ const JobPage = () => {
 
           <Popconfirm
             placement="leftTop"
-            title={'Xác nhận xóa job'}
-            description={'Bạn có chắc chắn muốn xóa job này ?'}
+            title={"Xác nhận xóa job"}
+            description={"Bạn có chắc chắn muốn xóa job này ?"}
             onConfirm={() => handleDeleteJob(entity._id)}
             okText="Xác nhận"
             cancelText="Hủy"
           >
-            <span style={{ cursor: 'pointer', margin: '0 10px' }}>
+            <span style={{ cursor: "pointer", margin: "0 10px" }}>
               <DeleteOutlined
                 style={{
                   fontSize: 20,
-                  color: '#ff4d4f',
+                  color: "#ff4d4f",
                 }}
               />
             </span>
@@ -166,25 +174,25 @@ const JobPage = () => {
     if (clone.name) clone.name = `/${clone.name}/i`;
     if (clone.salary) clone.salary = `/${clone.salary}/i`;
     if (clone?.level?.length) {
-      clone.level = clone.level.join(',');
+      clone.level = clone.level.join(",");
     }
 
     let temp = queryString.stringify(clone);
 
-    let sortBy = '';
+    let sortBy = "";
     if (sort && sort.name) {
-      sortBy = sort.name === 'ascend' ? 'sort=name' : 'sort=-name';
+      sortBy = sort.name === "ascend" ? "sort=name" : "sort=-name";
     }
     if (sort && sort.salary) {
-      sortBy = sort.salary === 'ascend' ? 'sort=salary' : 'sort=-salary';
+      sortBy = sort.salary === "ascend" ? "sort=salary" : "sort=-salary";
     }
     if (sort && sort.createdAt) {
       sortBy =
-        sort.createdAt === 'ascend' ? 'sort=createdAt' : 'sort=-createdAt';
+        sort.createdAt === "ascend" ? "sort=createdAt" : "sort=-createdAt";
     }
     if (sort && sort.updatedAt) {
       sortBy =
-        sort.updatedAt === 'ascend' ? 'sort=updatedAt' : 'sort=-updatedAt';
+        sort.updatedAt === "ascend" ? "sort=updatedAt" : "sort=-updatedAt";
     }
 
     //mặc định sort theo updatedAt
@@ -219,7 +227,7 @@ const JobPage = () => {
           showTotal: (total, range) => {
             return (
               <div>
-                {' '}
+                {" "}
                 {range[0]}-{range[1]} trên {total} rows
               </div>
             );
@@ -231,7 +239,7 @@ const JobPage = () => {
             <Button
               icon={<PlusOutlined />}
               type="primary"
-              onClick={() => navigate('upsert')}
+              onClick={() => navigate("upsert")}
             >
               Thêm mới
             </Button>

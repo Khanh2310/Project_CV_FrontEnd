@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { callFetchJob } from '@/config/api';
-import { IJob } from '@/types/backend';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { callFetchJob } from "@/config/api";
+import { IJob } from "@/types/backend";
 
 interface IState {
   isFetching: boolean;
@@ -14,7 +14,7 @@ interface IState {
 }
 // First, create the thunk
 export const fetchJob = createAsyncThunk(
-  'job/fetchJob',
+  "job/fetchJob",
   async ({ query }: { query: string }) => {
     const response = await callFetchJob(query);
     return response;
@@ -33,7 +33,7 @@ const initialState: IState = {
 };
 
 export const jobSlide = createSlice({
-  name: 'job',
+  name: "job",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {

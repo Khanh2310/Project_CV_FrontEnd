@@ -1,14 +1,13 @@
-import { Button, Col, Form, Row, Select } from 'antd';
-import { EnvironmentOutlined, MonitorOutlined } from '@ant-design/icons';
-import { LOCATION_LIST, SKILLS_LIST } from '@/config/utils';
-import { ProForm } from '@ant-design/pro-components';
+import { Button, Col, Form, Row, Select } from "antd";
+import { EnvironmentOutlined, MonitorOutlined } from "@ant-design/icons";
+import { LOCATION_LIST, SKILLS_LIST } from "@/config/utils";
+import { ProForm } from "@ant-design/pro-components";
 
-export const SearchClient = () => {
+const SearchClient = () => {
   const optionsSkills = SKILLS_LIST;
   const optionsLocations = LOCATION_LIST;
   const [form] = Form.useForm();
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onFinish = async (values: any) => {};
 
   return (
@@ -29,7 +28,7 @@ export const SearchClient = () => {
               mode="multiple"
               allowClear
               showArrow={false}
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               placeholder={
                 <>
                   <MonitorOutlined /> Tìm theo kỹ năng...
@@ -46,7 +45,7 @@ export const SearchClient = () => {
               mode="multiple"
               allowClear
               showArrow={false}
-              style={{ width: '100%' }}
+              style={{ width: "100%" }}
               placeholder={
                 <>
                   <EnvironmentOutlined /> Địa điểm...
@@ -66,3 +65,4 @@ export const SearchClient = () => {
     </ProForm>
   );
 };
+export default SearchClient;

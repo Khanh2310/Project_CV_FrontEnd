@@ -1,8 +1,9 @@
-import { Action, configureStore, ThunkAction } from '@reduxjs/toolkit';
-import accountReducer from './slice/accountSlide';
-import companyReducer from './slice/companySlide';
-import userReducer from './slice/userSlide';
-import jobReducer from './slice/jobSlide';
+import { Action, configureStore, ThunkAction } from "@reduxjs/toolkit";
+import accountReducer from "./slice/accountSlide";
+import companyReducer from "./slice/companySlide";
+import userReducer from "./slice/userSlide";
+import jobReducer from "./slice/jobSlide";
+import resumeReducer from "./slice/resumeSlide";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     company: companyReducer,
     user: userReducer,
     job: jobReducer,
+    resume: resumeReducer,
   },
 });
 

@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { callFetchCompany } from '@/config/api';
-import { ICompany } from '@/types/backend';
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { callFetchCompany } from "@/config/api";
+import { ICompany } from "@/types/backend";
 
 interface IState {
   isFetching: boolean;
@@ -14,7 +14,7 @@ interface IState {
 }
 // First, create the thunk
 export const fetchCompany = createAsyncThunk(
-  'company/fetchCompany',
+  "company/fetchCompany",
   async ({ query }: { query: string }) => {
     const response = await callFetchCompany(query);
     return response;
@@ -33,7 +33,7 @@ const initialState: IState = {
 };
 
 export const companySlide = createSlice({
-  name: 'company',
+  name: "company",
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {

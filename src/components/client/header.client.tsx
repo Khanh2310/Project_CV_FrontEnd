@@ -1,21 +1,21 @@
-import { useState } from 'react';
+import { useState, useEffect } from "react";
 import {
   CodeOutlined,
   LogoutOutlined,
   MenuFoldOutlined,
   RiseOutlined,
   TwitterOutlined,
-} from '@ant-design/icons';
-import { Avatar, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
-import { Menu, ConfigProvider } from 'antd';
-import styles from '@/styles/client.module.scss';
-import { isMobile } from 'react-device-detect';
-import { FaReact } from 'react-icons/fa';
-import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import { callLogout } from '@/config/api';
-import { setLogoutAction } from '@/redux/slice/accountSlide';
+} from "@ant-design/icons";
+import { Avatar, Drawer, Dropdown, MenuProps, Space, message } from "antd";
+import { Menu, ConfigProvider } from "antd";
+import styles from "@/styles/client.module.scss";
+import { isMobile } from "react-device-detect";
+import { FaReact } from "react-icons/fa";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { callLogout } from "@/config/api";
+import { setLogoutAction } from "@/redux/slice/accountSlide";
 
 const Header = (props: any) => {
   const navigate = useNavigate();
@@ -27,28 +27,33 @@ const Header = (props: any) => {
   const user = useAppSelector((state) => state.account.user);
   const [openMobileMenu, setOpenMobileMenu] = useState<boolean>(false);
 
-  const items: MenuProps['items'] = [
+  const [current, setCurrent] = useState("home");
+  const location = useLocation();
+
+  useEffect(() => {
+    setCurrent(location.pathname);
+  }, [location]);
+
+  const items: MenuProps["items"] = [
     {
-      label: <Link to={''}>Trang Chủ</Link>,
-      key: 'home',
+      label: <Link to={"/"}>Trang Chủ</Link>,
+      key: "/",
       icon: <TwitterOutlined />,
     },
     {
-      label: <Link to={'job'}>Việc Làm IT</Link>,
-      key: 'job',
+      label: <Link to={"/job"}>Việc Làm IT</Link>,
+      key: "/job",
       icon: <CodeOutlined />,
     },
     {
-      label: <Link to={'company'}>Top Công ty IT</Link>,
-      key: 'company',
+      label: <Link to={"/company"}>Top Công ty IT</Link>,
+      key: "/company",
       icon: <RiseOutlined />,
     },
   ];
 
-  const [current, setCurrent] = useState('home');
-
-  const onClick: MenuProps['onClick'] = (e) => {
-    console.log('click ', e);
+  const onClick: MenuProps["onClick"] = (e) => {
+    console.log("click ", e);
     setCurrent(e.key);
   };
 
@@ -56,19 +61,19 @@ const Header = (props: any) => {
     const res = await callLogout();
     if (res && res.data) {
       dispatch(setLogoutAction({}));
-      message.success('Đăng xuất thành công');
-      navigate('/');
+      message.success("Đăng xuất thành công");
+      navigate("/");
     }
   };
 
   const itemsDropdown = [
     {
       label: (
-        <label style={{ cursor: 'pointer' }} onClick={() => handleLogout()}>
+        <label style={{ cursor: "pointer" }} onClick={() => handleLogout()}>
           Đăng xuất
         </label>
       ),
-      key: 'logout',
+      key: "logout",
       icon: <LogoutOutlined />,
     },
   ];
@@ -77,43 +82,43 @@ const Header = (props: any) => {
 
   return (
     <>
-      <div className={styles['header-section']}>
-        <div className={styles['container']}>
+      <div className={styles["header-section"]}>
+        <div className={styles["container"]}>
           {!isMobile ? (
-            <div style={{ display: 'flex', gap: 30 }}>
-              <div className={styles['brand']}>
-                <FaReact onClick={() => navigate('/')} />
+            <div style={{ display: "flex", gap: 30 }}>
+              <div className={styles["brand"]}>
+                <FaReact onClick={() => navigate("/")} title="Hỏi Dân IT" />
               </div>
-              <div className={styles['top-menu']}>
+              <div className={styles["top-menu"]}>
                 <ConfigProvider
                   theme={{
                     token: {
-                      colorPrimary: '#fff',
-                      colorBgContainer: '#222831',
-                      colorText: '#a7a7a7',
+                      colorPrimary: "#fff",
+                      colorBgContainer: "#222831",
+                      colorText: "#a7a7a7",
                     },
                   }}
                 >
                   <Menu
-                    onClick={onClick}
+                    // onClick={onClick}
                     selectedKeys={[current]}
                     mode="horizontal"
                     items={items}
                   />
                 </ConfigProvider>
-                <div className={styles['extra']}>
+                <div className={styles["extra"]}>
                   {isAuthenticated === false ? (
-                    <Link to={'/login'}>Đăng Nhập</Link>
+                    <Link to={"/login"}>Đăng Nhập</Link>
                   ) : (
                     <Dropdown
                       menu={{ items: itemsDropdown }}
-                      trigger={['click']}
+                      trigger={["click"]}
                     >
-                      <Space style={{ cursor: 'pointer' }}>
+                      <Space style={{ cursor: "pointer" }}>
                         <span>Welcome {user?.name}</span>
                         <Avatar>
-                          {' '}
-                          {user?.name?.substring(0, 2)?.toUpperCase()}{' '}
+                          {" "}
+                          {user?.name?.substring(0, 2)?.toUpperCase()}{" "}
                         </Avatar>
                       </Space>
                     </Dropdown>
@@ -122,7 +127,7 @@ const Header = (props: any) => {
               </div>
             </div>
           ) : (
-            <div className={styles['header-mobile']}>
+            <div className={styles["header-mobile"]}>
               <span>Your APP</span>
               <MenuFoldOutlined onClick={() => setOpenMobileMenu(true)} />
             </div>

@@ -1,50 +1,50 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from "react";
 import {
   createBrowserRouter,
   Outlet,
   RouterProvider,
   useLocation,
-} from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '@/redux/hooks';
-import LoginPage from 'pages/auth/login';
-import RegisterPage from 'pages/auth/register';
-import LayoutAdmin from 'components/admin/layout.admin';
-import Header from 'components/client/header.client';
-import Footer from 'components/client/footer.client';
-import HomePage from 'pages/home';
-import styles from 'styles/app.module.scss';
-import DashboardPage from './pages/admin/dashboard';
-import CompanyPage from './pages/admin/company';
-import UserPage from './pages/admin/user';
-import { fetchAccount } from './redux/slice/accountSlide';
-import JobPage from './pages/admin/job';
-import ViewUpsertJob from './components/admin/job/upsert.job';
-import ClientJobPage from './pages/job';
-import ClientJobDetailPage from './pages/job/detail';
-import { PermissionPage } from './pages/admin/permission';
-import NotFound from './components/shared/not.found';
-import { RolePage } from './pages/admin/role';
-import { ResumePage } from './pages/admin/resume';
-import { ClientCompanyPage } from './pages/company';
-import { ClientCompanyDetailPage } from './pages/company/detail';
-import LayoutApp from './components/shared/layout.app';
-import ProtectedRoute from './components/shared/protected-route';
+} from "react-router-dom";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import LoginPage from "pages/auth/login";
+import RegisterPage from "pages/auth/register";
+import LayoutAdmin from "components/admin/layout.admin";
+import Header from "components/client/header.client";
+import Footer from "components/client/footer.client";
+import HomePage from "pages/home";
+import styles from "styles/app.module.scss";
+import DashboardPage from "./pages/admin/dashboard";
+import CompanyPage from "./pages/admin/company";
+import ResumePage from "./pages/admin/resume";
+import UserPage from "./pages/admin/user";
+import { fetchAccount } from "./redux/slice/accountSlide";
+import JobPage from "./pages/admin/job";
+import ViewUpsertJob from "./components/admin/job/upsert.job";
+import ClientJobPage from "./pages/job";
+import ClientJobDetailPage from "./pages/job/detail";
+import ClientCompanyPage from "./pages/company";
+import ClientCompanyDetailPage from "./pages/company/detail";
+import NotFound from "./components/shared/not.found";
+import ProtectedRoute from "./components/shared/protected-route";
+import { PermissionPage } from "./pages/admin/permission";
+import { RolePage } from "./pages/admin/role";
+import LayoutApp from "./components/shared/layout.app";
 
 const LayoutClient = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
   const rootRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (rootRef && rootRef.current) {
-      rootRef.current.scrollIntoView({ behavior: 'smooth' });
+      rootRef.current.scrollIntoView({ behavior: "smooth" });
     }
   }, [location]);
 
   return (
     <div className="layout-app" ref={rootRef}>
       <Header searchTerm={searchTerm} setSearchTerm={setSearchTerm} />
-      <div className={styles['content-app']}>
+      <div className={styles["content-app"]}>
         <Outlet context={[searchTerm, setSearchTerm]} />
       </div>
       <Footer />
@@ -58,8 +58,8 @@ export default function App() {
 
   useEffect(() => {
     if (
-      window.location.pathname === '/login' ||
-      window.location.pathname === '/register'
+      window.location.pathname === "/login" ||
+      window.location.pathname === "/register"
     )
       return;
     dispatch(fetchAccount());
@@ -67,7 +67,7 @@ export default function App() {
 
   const router = createBrowserRouter([
     {
-      path: '/',
+      path: "/",
       element: (
         <LayoutApp>
           <LayoutClient />
@@ -76,18 +76,18 @@ export default function App() {
       errorElement: <NotFound />,
       children: [
         { index: true, element: <HomePage /> },
-        { path: 'job', element: <ClientJobPage /> },
-        { path: 'job/:id', element: <ClientJobDetailPage /> },
-        { path: 'company', element: <ClientCompanyPage /> },
-        { path: 'company/:id', element: <ClientCompanyDetailPage /> },
+        { path: "job", element: <ClientJobPage /> },
+        { path: "job/:id", element: <ClientJobDetailPage /> },
+        { path: "company", element: <ClientCompanyPage /> },
+        { path: "company/:id", element: <ClientCompanyDetailPage /> },
       ],
     },
 
     {
-      path: '/admin',
+      path: "/admin",
       element: (
         <LayoutApp>
-          <LayoutAdmin />{' '}
+          <LayoutAdmin />{" "}
         </LayoutApp>
       ),
       errorElement: <NotFound />,
@@ -101,7 +101,7 @@ export default function App() {
           ),
         },
         {
-          path: 'company',
+          path: "company",
           element: (
             <ProtectedRoute>
               <CompanyPage />
@@ -109,7 +109,7 @@ export default function App() {
           ),
         },
         {
-          path: 'user',
+          path: "user",
           element: (
             <ProtectedRoute>
               <UserPage />
@@ -118,19 +118,19 @@ export default function App() {
         },
 
         {
-          path: 'job',
+          path: "job",
           children: [
             {
               index: true,
               element: (
                 <ProtectedRoute>
-                  {' '}
+                  {" "}
                   <JobPage />
                 </ProtectedRoute>
               ),
             },
             {
-              path: 'upsert',
+              path: "upsert",
               element: (
                 <ProtectedRoute>
                   <ViewUpsertJob />
@@ -141,7 +141,7 @@ export default function App() {
         },
 
         {
-          path: 'resume',
+          path: "resume",
           element: (
             <ProtectedRoute>
               <ResumePage />
@@ -149,7 +149,7 @@ export default function App() {
           ),
         },
         {
-          path: 'permission',
+          path: "permission",
           element: (
             <ProtectedRoute>
               <PermissionPage />
@@ -157,7 +157,7 @@ export default function App() {
           ),
         },
         {
-          path: 'role',
+          path: "role",
           element: (
             <ProtectedRoute>
               <RolePage />
@@ -168,12 +168,12 @@ export default function App() {
     },
 
     {
-      path: '/login',
+      path: "/login",
       element: <LoginPage />,
     },
 
     {
-      path: '/register',
+      path: "/register",
       element: <RegisterPage />,
     },
   ]);

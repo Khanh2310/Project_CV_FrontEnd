@@ -1,10 +1,10 @@
-import React, { useMemo, useRef, useState } from 'react';
-import { Select, Spin } from 'antd';
-import type { SelectProps } from 'antd/es/select';
-import debounce from 'lodash/debounce';
+import React, { useMemo, useRef, useState } from "react";
+import { Select, Spin } from "antd";
+import type { SelectProps } from "antd/es/select";
+import debounce from "lodash/debounce";
 
 export interface DebounceSelectProps<ValueType = any>
-  extends Omit<SelectProps<ValueType | ValueType[]>, 'options' | 'children'> {
+  extends Omit<SelectProps<ValueType | ValueType[]>, "options" | "children"> {
   fetchOptions: (search: string) => Promise<ValueType[]>;
   debounceTimeout?: number;
 }
@@ -18,7 +18,6 @@ export function DebounceSelect<
 >({
   fetchOptions,
   debounceTimeout = 800,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   value,
   ...props
 }: DebounceSelectProps<ValueType>) {
@@ -51,7 +50,7 @@ export function DebounceSelect<
     if (options && options.length > 0) {
       return;
     }
-    fetchOptions('').then((newOptions) => {
+    fetchOptions("").then((newOptions) => {
       setOptions([...options, ...newOptions]);
     });
   };

@@ -188,6 +188,18 @@
   }
 }
 
+.company-section {
+  .company-content {
+    padding-top: 50px;
+
+    .card-customize {
+      height: 200px;
+      width: 200px;
+      margin: 20px auto;
+    }
+  }
+}
+
 .home-section {
   .empty {
     display: flex;
@@ -208,19 +220,9 @@
     justify-content: space-between;
   }
 
-  .company-content {
-    padding-top: 50px;
-
-    .card-customize {
-      height: 200px;
-      width: 200px;
-      margin: 20px auto;
-    }
-  }
-
   .title {
     font-size: 27px;
-    font-family: 'Roboto', sans-serif;
+    font-family: "Roboto", sans-serif;
     color: #353535;
     line-height: 35px;
     margin-top: 20px;
