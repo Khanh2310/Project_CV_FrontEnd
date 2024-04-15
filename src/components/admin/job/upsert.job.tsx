@@ -337,7 +337,6 @@ const ViewUpsertJob = (props: any) => {
                   fieldProps={{
                     format: 'DD/MM/YYYY',
                   }}
-                  // width="auto"
                   rules={[
                     { required: true, message: 'Vui lòng chọn ngày cấp' },
                   ]}
