@@ -1,10 +1,11 @@
-import { Col, Row } from "antd";
-import styles from "styles/client.module.scss";
-import CompanyCard from "@/components/client/card/company.card";
+import { Col, Row } from 'antd';
+import styles from 'styles/client.module.scss';
+import CompanyCard from '@/components/client/card/company.card';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClientCompanyPage = (props: any) => {
   return (
-    <div className={styles["container"]} style={{ marginTop: 20 }}>
+    <div className={styles['container']} style={{ marginTop: 20 }}>
       <Row gutter={[20, 20]}>
         <Col span={24}>
           <CompanyCard showPagination={true} />

@@ -3,16 +3,15 @@ import {
   Divider,
   Form,
   Input,
-  Row,
   Select,
   message,
   notification,
-} from "antd";
-import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { callRegister } from "config/api";
-import styles from "styles/auth.module.scss";
-import { IUser } from "@/types/backend";
+} from 'antd';
+import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import { callRegister } from 'config/api';
+import styles from 'styles/auth.module.scss';
+import { IUser } from '@/types/backend';
 const { Option } = Select;
 
 const RegisterPage = () => {
@@ -32,11 +31,11 @@ const RegisterPage = () => {
     );
     setIsSubmit(false);
     if (res?.data?._id) {
-      message.success("Đăng ký tài khoản thành công!");
-      navigate("/login");
+      message.success('Đăng ký tài khoản thành công!');
+      navigate('/login');
     } else {
       notification.error({
-        message: "Có lỗi xảy ra",
+        message: 'Có lỗi xảy ra',
         description:
           res.message && Array.isArray(res.message)
             ? res.message[0]
@@ -47,79 +46,70 @@ const RegisterPage = () => {
   };
 
   return (
-    <div className={styles["register-page"]}>
+    <div className={styles['register-page']}>
       <main className={styles.main}>
         <div className={styles.container}>
           <section className={styles.wrapper}>
             <div className={styles.heading}>
-              <h2 className={`${styles.text} ${styles["text-large"]}`}>
-                {" "}
-                Đăng Ký Tài Khoản{" "}
+              <h2 className={`${styles.text} ${styles['text-large']}`}>
+                {' '}
+                Đăng Ký Tài Khoản{' '}
               </h2>
               <Divider />
             </div>
-            <Form<IUser>
-              name="basic"
-              // style={{ maxWidth: 600, margin: '0 auto' }}
-              onFinish={onFinish}
-              autoComplete="off"
-            >
+            <Form<IUser> name="basic" onFinish={onFinish} autoComplete="off">
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Họ tên"
                 name="name"
                 rules={[
-                  { required: true, message: "Họ tên không được để trống!" },
+                  { required: true, message: 'Họ tên không được để trống!' },
                 ]}
               >
                 <Input />
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Email"
                 name="email"
                 rules={[
-                  { required: true, message: "Email không được để trống!" },
+                  { required: true, message: 'Email không được để trống!' },
                 ]}
               >
                 <Input type="email" />
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Mật khẩu"
                 name="password"
                 rules={[
-                  { required: true, message: "Mật khẩu không được để trống!" },
+                  { required: true, message: 'Mật khẩu không được để trống!' },
                 ]}
               >
                 <Input.Password />
               </Form.Item>
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Tuổi"
                 name="age"
                 rules={[
-                  { required: true, message: "Tuổi không được để trống!" },
+                  { required: true, message: 'Tuổi không được để trống!' },
                 ]}
               >
                 <Input type="number" />
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 name="gender"
                 label="Giới tính"
                 rules={[
-                  { required: true, message: "Giới tính không được để trống!" },
+                  { required: true, message: 'Giới tính không được để trống!' },
                 ]}
               >
-                <Select
-                  // placeholder="Select a option and change input text above"
-                  // onChange={onGenderChange}
-                  allowClear
-                >
+                <Select allowClear>
                   <Option value="male">Nam</Option>
                   <Option value="female">Nữ</Option>
                   <Option value="other">Khác</Option>
@@ -127,26 +117,24 @@ const RegisterPage = () => {
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Địa chỉ"
                 name="address"
                 rules={[
-                  { required: true, message: "Địa chỉ không được để trống!" },
+                  { required: true, message: 'Địa chỉ không được để trống!' },
                 ]}
               >
                 <Input />
               </Form.Item>
 
-              <Form.Item
-              // wrapperCol={{ offset: 6, span: 16 }}
-              >
+              <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isSubmit}>
                   Đăng ký
                 </Button>
               </Form.Item>
               <Divider> Or </Divider>
               <p className="text text-normal">
-                {" "}
+                {' '}
                 Đã có tài khoản ?
                 <span>
                   <Link to="/login"> Đăng Nhập </Link>

@@ -1,19 +1,20 @@
-import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
-import { ICompany } from "@/types/backend";
-import { callFetchCompanyById } from "@/config/api";
-import styles from "styles/client.module.scss";
-import parse from "html-react-parser";
-import { Col, Divider, Row, Skeleton } from "antd";
-import { EnvironmentOutlined } from "@ant-design/icons";
+import { useLocation } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { ICompany } from '@/types/backend';
+import { callFetchCompanyById } from '@/config/api';
+import styles from 'styles/client.module.scss';
+import parse from 'html-react-parser';
+import { Col, Divider, Row, Skeleton } from 'antd';
+import { EnvironmentOutlined } from '@ant-design/icons';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClientCompanyDetailPage = (props: any) => {
   const [companyDetail, setCompanyDetail] = useState<ICompany | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
-  const id = params?.get("id"); // job id
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const id = params?.get('id');
 
   useEffect(() => {
     const init = async () => {
@@ -30,7 +31,7 @@ const ClientCompanyDetailPage = (props: any) => {
   }, [id]);
 
   return (
-    <div className={`${styles["container"]} ${styles["detail-job-section"]}`}>
+    <div className={`${styles['container']} ${styles['detail-job-section']}`}>
       {isLoading ? (
         <Skeleton />
       ) : (
@@ -38,19 +39,19 @@ const ClientCompanyDetailPage = (props: any) => {
           {companyDetail && companyDetail._id && (
             <>
               <Col span={24} md={16}>
-                <div className={styles["header"]}>{companyDetail.name}</div>
+                <div className={styles['header']}>{companyDetail.name}</div>
 
-                <div className={styles["location"]}>
-                  <EnvironmentOutlined style={{ color: "#58aaab" }} />
+                <div className={styles['location']}>
+                  <EnvironmentOutlined style={{ color: '#58aaab' }} />
                   &nbsp;{companyDetail?.address}
                 </div>
 
                 <Divider />
-                {parse(companyDetail?.description ?? "")}
+                {parse(companyDetail?.description ?? '')}
               </Col>
 
               <Col span={24} md={8}>
-                <div className={styles["company"]}>
+                <div className={styles['company']}>
                   <div>
                     <img
                       alt="example"

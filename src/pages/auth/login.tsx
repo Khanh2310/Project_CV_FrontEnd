@@ -1,25 +1,25 @@
-import { Button, Divider, Form, Input, message, notification } from "antd";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import { callLogin } from "config/api";
-import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { setUserLoginInfo } from "@/redux/slice/accountSlide";
-import styles from "styles/auth.module.scss";
+import { Button, Divider, Form, Input, message, notification } from 'antd';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { callLogin } from 'config/api';
+import { useState, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { setUserLoginInfo } from '@/redux/slice/accountSlide';
+import styles from 'styles/auth.module.scss';
 
 const LoginPage = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const navigate = useNavigate();
   const [isSubmit, setIsSubmit] = useState(false);
   const dispatch = useDispatch();
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
-  const callback = params?.get("callback");
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const callback = params?.get('callback');
 
   useEffect(() => {
     //đã login => redirect to '/'
-    if (localStorage.getItem("access_token")) {
-      // navigate('/');
-      window.location.href = "/";
+    if (localStorage.getItem('access_token')) {
+      window.location.href = '/';
     }
   }, []);
 
@@ -29,13 +29,13 @@ const LoginPage = () => {
     const res = await callLogin(username, password);
     setIsSubmit(false);
     if (res?.data) {
-      localStorage.setItem("access_token", res.data.access_token);
+      localStorage.setItem('access_token', res.data.access_token);
       dispatch(setUserLoginInfo(res.data.user));
-      message.success("Đăng nhập tài khoản thành công!");
-      window.location.href = callback ? callback : "/";
+      message.success('Đăng nhập tài khoản thành công!');
+      window.location.href = callback ? callback : '/';
     } else {
       notification.error({
-        message: "Có lỗi xảy ra",
+        message: 'Có lỗi xảy ra',
         description:
           res.message && Array.isArray(res.message)
             ? res.message[0]
@@ -46,47 +46,40 @@ const LoginPage = () => {
   };
 
   return (
-    <div className={styles["login-page"]}>
+    <div className={styles['login-page']}>
       <main className={styles.main}>
         <div className={styles.container}>
           <section className={styles.wrapper}>
             <div className={styles.heading}>
-              <h2 className={`${styles.text} ${styles["text-large"]}`}>
+              <h2 className={`${styles.text} ${styles['text-large']}`}>
                 Đăng Nhập
               </h2>
               <Divider />
             </div>
-            <Form
-              name="basic"
-              // style={{ maxWidth: 600, margin: '0 auto' }}
-              onFinish={onFinish}
-              autoComplete="off"
-            >
+            <Form name="basic" onFinish={onFinish} autoComplete="off">
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Email"
                 name="username"
                 rules={[
-                  { required: true, message: "Email không được để trống!" },
+                  { required: true, message: 'Email không được để trống!' },
                 ]}
               >
                 <Input />
               </Form.Item>
 
               <Form.Item
-                labelCol={{ span: 24 }} //whole column
+                labelCol={{ span: 24 }}
                 label="Mật khẩu"
                 name="password"
                 rules={[
-                  { required: true, message: "Mật khẩu không được để trống!" },
+                  { required: true, message: 'Mật khẩu không được để trống!' },
                 ]}
               >
                 <Input.Password />
               </Form.Item>
 
-              <Form.Item
-              // wrapperCol={{ offset: 6, span: 16 }}
-              >
+              <Form.Item>
                 <Button type="primary" htmlType="submit" loading={isSubmit}>
                   Đăng nhập
                 </Button>

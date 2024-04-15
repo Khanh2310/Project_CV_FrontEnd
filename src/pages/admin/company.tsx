@@ -1,15 +1,15 @@
-import ModalCompany from "@/components/admin/company/modal.company";
-import DataTable from "@/components/client/data-table";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { fetchCompany } from "@/redux/slice/companySlide";
-import { ICompany } from "@/types/backend";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
-import { ActionType, ProColumns } from "@ant-design/pro-components";
-import { Button, Popconfirm, Space, message, notification } from "antd";
-import { useState, useRef } from "react";
-import dayjs from "dayjs";
-import { callDeleteCompany } from "@/config/api";
-import queryString from "query-string";
+import ModalCompany from '@/components/admin/company/modal.company';
+import DataTable from '@/components/client/data-table';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { fetchCompany } from '@/redux/slice/companySlide';
+import { ICompany } from '@/types/backend';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
+import { ActionType, ProColumns } from '@ant-design/pro-components';
+import { Button, Popconfirm, Space, message, notification } from 'antd';
+import { useState, useRef } from 'react';
+import dayjs from 'dayjs';
+import { callDeleteCompany } from '@/config/api';
+import queryString from 'query-string';
 
 const CompanyPage = () => {
   const [openModal, setOpenModal] = useState<boolean>(false);
@@ -26,11 +26,11 @@ const CompanyPage = () => {
     if (_id) {
       const res = await callDeleteCompany(_id);
       if (res && res.data) {
-        message.success("Xóa Company thành công");
+        message.success('Xóa Company thành công');
         reloadTable();
       } else {
         notification.error({
-          message: "Có lỗi xảy ra",
+          message: 'Có lỗi xảy ra',
           description: res.message,
         });
       }
@@ -43,65 +43,69 @@ const CompanyPage = () => {
 
   const columns: ProColumns<ICompany>[] = [
     {
-      title: "STT",
-      key: "index",
+      title: 'STT',
+      key: 'index',
       width: 50,
-      align: "center",
+      align: 'center',
       render: (text, record, index) => {
         return <>{index + 1 + (meta.current - 1) * meta.pageSize}</>;
       },
       hideInSearch: true,
     },
     {
-      title: "Id",
-      dataIndex: "_id",
+      title: 'Id',
+      dataIndex: '_id',
       width: 250,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <span>{record._id}</span>;
       },
       hideInSearch: true,
     },
     {
-      title: "Name",
-      dataIndex: "name",
+      title: 'Name',
+      dataIndex: 'name',
       sorter: true,
     },
     {
-      title: "Address",
-      dataIndex: "address",
+      title: 'Address',
+      dataIndex: 'address',
       sorter: true,
     },
 
     {
-      title: "CreatedAt",
-      dataIndex: "createdAt",
+      title: 'CreatedAt',
+      dataIndex: 'createdAt',
       width: 200,
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
-        return <>{dayjs(record.createdAt).format("DD-MM-YYYY HH:mm:ss")}</>;
+        return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
       hideInSearch: true,
     },
     {
-      title: "UpdatedAt",
-      dataIndex: "updatedAt",
+      title: 'UpdatedAt',
+      dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
-        return <>{dayjs(record.updatedAt).format("DD-MM-YYYY HH:mm:ss")}</>;
+        return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
       hideInSearch: true,
     },
     {
-      title: "Actions",
+      title: 'Actions',
       hideInSearch: true,
       width: 50,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (_value, entity, _index, _action) => (
         <Space>
           <EditOutlined
             style={{
               fontSize: 20,
-              color: "#ffa500",
+              color: '#ffa500',
             }}
             type=""
             onClick={() => {
@@ -112,17 +116,17 @@ const CompanyPage = () => {
 
           <Popconfirm
             placement="leftTop"
-            title={"Xác nhận xóa company"}
-            description={"Bạn có chắc chắn muốn xóa company này ?"}
+            title={'Xác nhận xóa company'}
+            description={'Bạn có chắc chắn muốn xóa company này ?'}
             onConfirm={() => handleDeleteCompany(entity._id)}
             okText="Xác nhận"
             cancelText="Hủy"
           >
-            <span style={{ cursor: "pointer", margin: "0 10px" }}>
+            <span style={{ cursor: 'pointer', margin: '0 10px' }}>
               <DeleteOutlined
                 style={{
                   fontSize: 20,
-                  color: "#ff4d4f",
+                  color: '#ff4d4f',
                 }}
               />
             </span>
@@ -132,6 +136,7 @@ const CompanyPage = () => {
     },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const buildQuery = (params: any, sort: any, filter: any) => {
     const clone = { ...params };
     if (clone.name) clone.name = `/${clone.name}/i`;
@@ -139,20 +144,20 @@ const CompanyPage = () => {
 
     let temp = queryString.stringify(clone);
 
-    let sortBy = "";
+    let sortBy = '';
     if (sort && sort.name) {
-      sortBy = sort.name === "ascend" ? "sort=name" : "sort=-name";
+      sortBy = sort.name === 'ascend' ? 'sort=name' : 'sort=-name';
     }
     if (sort && sort.address) {
-      sortBy = sort.address === "ascend" ? "sort=address" : "sort=-address";
+      sortBy = sort.address === 'ascend' ? 'sort=address' : 'sort=-address';
     }
     if (sort && sort.createdAt) {
       sortBy =
-        sort.createdAt === "ascend" ? "sort=createdAt" : "sort=-createdAt";
+        sort.createdAt === 'ascend' ? 'sort=createdAt' : 'sort=-createdAt';
     }
     if (sort && sort.updatedAt) {
       sortBy =
-        sort.updatedAt === "ascend" ? "sort=updatedAt" : "sort=-updatedAt";
+        sort.updatedAt === 'ascend' ? 'sort=updatedAt' : 'sort=-updatedAt';
     }
 
     //mặc định sort theo updatedAt
@@ -187,13 +192,14 @@ const CompanyPage = () => {
           showTotal: (total, range) => {
             return (
               <div>
-                {" "}
+                {' '}
                 {range[0]}-{range[1]} trên {total} rows
               </div>
             );
           },
         }}
         rowSelection={false}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         toolBarRender={(_action, _rows): any => {
           return (
             <Button

@@ -1,14 +1,14 @@
-import { callFetchJob } from "@/config/api";
-import { LOCATION_LIST, convertSlug, getLocationName } from "@/config/utils";
-import { IJob } from "@/types/backend";
-import { EnvironmentOutlined, ThunderboltOutlined } from "@ant-design/icons";
-import { Card, Col, Empty, Pagination, Row, Spin } from "antd";
-import { useState, useEffect } from "react";
-import { isMobile } from "react-device-detect";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "styles/client.module.scss";
-import dayjs from "dayjs";
-import relativeTime from "dayjs/plugin/relativeTime";
+import { callFetchJob } from '@/config/api';
+import { convertSlug, getLocationName } from '@/config/utils';
+import { IJob } from '@/types/backend';
+import { EnvironmentOutlined, ThunderboltOutlined } from '@ant-design/icons';
+import { Card, Col, Empty, Pagination, Row, Spin } from 'antd';
+import { useState, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from 'styles/client.module.scss';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 interface IProps {
@@ -24,12 +24,15 @@ const JobCard = (props: IProps) => {
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [total, setTotal] = useState(0);
-  const [filter, setFilter] = useState("");
-  const [sortQuery, setSortQuery] = useState("sort=-updatedAt");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [filter, setFilter] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchJob();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, pageSize, filter, sortQuery]);
 
   const fetchJob = async () => {
@@ -69,17 +72,17 @@ const JobCard = (props: IProps) => {
   };
 
   return (
-    <div className={`${styles["card-job-section"]}`}>
-      <div className={`${styles["job-content"]}`}>
+    <div className={`${styles['card-job-section']}`}>
+      <div className={`${styles['job-content']}`}>
         <Spin spinning={isLoading} tip="Loading...">
           <Row gutter={[20, 20]}>
             <Col span={24}>
               <div
                 className={
-                  isMobile ? styles["dflex-mobile"] : styles["dflex-pc"]
+                  isMobile ? styles['dflex-mobile'] : styles['dflex-pc']
                 }
               >
-                <span className={styles["title"]}>Công Việc Mới Nhất</span>
+                <span className={styles['title']}>Công Việc Mới Nhất</span>
                 {!showPagination && <Link to="job">Xem tất cả</Link>}
               </div>
             </Col>
@@ -93,8 +96,8 @@ const JobCard = (props: IProps) => {
                     hoverable
                     onClick={() => handleViewDetailJob(item)}
                   >
-                    <div className={styles["card-job-content"]}>
-                      <div className={styles["card-job-left"]}>
+                    <div className={styles['card-job-content']}>
+                      <div className={styles['card-job-left']}>
                         <img
                           alt="example"
                           src={`${
@@ -102,22 +105,22 @@ const JobCard = (props: IProps) => {
                           }/images/company/${item?.company?.logo}`}
                         />
                       </div>
-                      <div className={styles["card-job-right"]}>
-                        <div className={styles["job-title"]}>{item.name}</div>
-                        <div className={styles["job-location"]}>
-                          <EnvironmentOutlined style={{ color: "#58aaab" }} />
+                      <div className={styles['card-job-right']}>
+                        <div className={styles['job-title']}>{item.name}</div>
+                        <div className={styles['job-location']}>
+                          <EnvironmentOutlined style={{ color: '#58aaab' }} />
                           &nbsp;{getLocationName(item.location)}
                         </div>
                         <div>
-                          <ThunderboltOutlined style={{ color: "orange" }} />
+                          <ThunderboltOutlined style={{ color: 'orange' }} />
                           &nbsp;
-                          {(item.salary + "")?.replace(
+                          {(item.salary + '')?.replace(
                             /\B(?=(\d{3})+(?!\d))/g,
-                            ","
-                          )}{" "}
+                            ','
+                          )}{' '}
                           đ
                         </div>
-                        <div className={styles["job-updatedAt"]}>
+                        <div className={styles['job-updatedAt']}>
                           {dayjs(item.updatedAt).fromNow()}
                         </div>
                       </div>
@@ -129,7 +132,7 @@ const JobCard = (props: IProps) => {
 
             {(!displayJob || (displayJob && displayJob.length === 0)) &&
               !isLoading && (
-                <div className={styles["empty"]}>
+                <div className={styles['empty']}>
                   <Empty description="Không có dữ liệu" />
                 </div>
               )}
@@ -137,7 +140,7 @@ const JobCard = (props: IProps) => {
           {showPagination && (
             <>
               <div style={{ marginTop: 30 }}></div>
-              <Row style={{ display: "flex", justifyContent: "center" }}>
+              <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                   current={current}
                   total={total}

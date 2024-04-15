@@ -1,11 +1,11 @@
-import { callFetchCompany } from "@/config/api";
-import { convertSlug } from "@/config/utils";
-import { ICompany } from "@/types/backend";
-import { Card, Col, Divider, Empty, Pagination, Row, Spin } from "antd";
-import { useState, useEffect } from "react";
-import { isMobile } from "react-device-detect";
-import { Link, useNavigate } from "react-router-dom";
-import styles from "styles/client.module.scss";
+import { callFetchCompany } from '@/config/api';
+import { convertSlug } from '@/config/utils';
+import { ICompany } from '@/types/backend';
+import { Card, Col, Divider, Empty, Pagination, Row, Spin } from 'antd';
+import { useState, useEffect } from 'react';
+import { isMobile } from 'react-device-detect';
+import { Link, useNavigate } from 'react-router-dom';
+import styles from 'styles/client.module.scss';
 
 interface IProps {
   showPagination?: boolean;
@@ -20,12 +20,15 @@ const CompanyCard = (props: IProps) => {
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(4);
   const [total, setTotal] = useState(0);
-  const [filter, setFilter] = useState("");
-  const [sortQuery, setSortQuery] = useState("sort=-updatedAt");
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [filter, setFilter] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchCompany();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, pageSize, filter, sortQuery]);
 
   const fetchCompany = async () => {
@@ -67,17 +70,17 @@ const CompanyCard = (props: IProps) => {
   };
 
   return (
-    <div className={`${styles["company-section"]}`}>
-      <div className={styles["company-content"]}>
+    <div className={`${styles['company-section']}`}>
+      <div className={styles['company-content']}>
         <Spin spinning={isLoading} tip="Loading...">
           <Row gutter={[20, 20]}>
             <Col span={24}>
               <div
                 className={
-                  isMobile ? styles["dflex-mobile"] : styles["dflex-pc"]
+                  isMobile ? styles['dflex-mobile'] : styles['dflex-pc']
                 }
               >
-                <span className={styles["title"]}>Nhà Tuyển Dụng Hàng Đầu</span>
+                <span className={styles['title']}>Nhà Tuyển Dụng Hàng Đầu</span>
                 {!showPagination && <Link to="company">Xem tất cả</Link>}
               </div>
             </Col>
@@ -90,7 +93,7 @@ const CompanyCard = (props: IProps) => {
                     style={{ height: 350 }}
                     hoverable
                     cover={
-                      <div className={styles["card-customize"]}>
+                      <div className={styles['card-customize']}>
                         <img
                           alt="example"
                           src={`${
@@ -101,7 +104,7 @@ const CompanyCard = (props: IProps) => {
                     }
                   >
                     <Divider />
-                    <h3 style={{ textAlign: "center" }}>{item.name}</h3>
+                    <h3 style={{ textAlign: 'center' }}>{item.name}</h3>
                   </Card>
                 </Col>
               );
@@ -110,7 +113,7 @@ const CompanyCard = (props: IProps) => {
             {(!displayCompany ||
               (displayCompany && displayCompany.length === 0)) &&
               !isLoading && (
-                <div className={styles["empty"]}>
+                <div className={styles['empty']}>
                   <Empty description="Không có dữ liệu" />
                 </div>
               )}
@@ -118,7 +121,7 @@ const CompanyCard = (props: IProps) => {
           {showPagination && (
             <>
               <div style={{ marginTop: 30 }}></div>
-              <Row style={{ display: "flex", justifyContent: "center" }}>
+              <Row style={{ display: 'flex', justifyContent: 'center' }}>
                 <Pagination
                   current={current}
                   total={total}

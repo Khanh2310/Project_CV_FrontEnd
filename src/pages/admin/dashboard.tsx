@@ -1,5 +1,5 @@
-import { Card, Col, Row, Statistic } from "antd";
-import CountUp from "react-countup";
+import { Card, Col, Row, Statistic } from 'antd';
+import CountUp from 'react-countup';
 
 const DashboardPage = () => {
   const formatter = (value: number | string) => {

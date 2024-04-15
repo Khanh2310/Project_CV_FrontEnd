@@ -2,14 +2,14 @@ import {
   CheckSquareOutlined,
   LoadingOutlined,
   PlusOutlined,
-} from "@ant-design/icons";
+} from '@ant-design/icons';
 import {
   FooterToolbar,
   ModalForm,
   ProCard,
   ProFormText,
   ProFormTextArea,
-} from "@ant-design/pro-components";
+} from '@ant-design/pro-components';
 import {
   Col,
   ConfigProvider,
@@ -19,20 +19,20 @@ import {
   Upload,
   message,
   notification,
-} from "antd";
-import "styles/reset.scss";
-import { isMobile } from "react-device-detect";
-import ReactQuill from "react-quill";
-import "react-quill/dist/quill.snow.css";
-import { useEffect, useState } from "react";
+} from 'antd';
+import 'styles/reset.scss';
+import { isMobile } from 'react-device-detect';
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
+import { useEffect, useState } from 'react';
 import {
   callCreateCompany,
   callUpdateCompany,
   callUploadSingleFile,
-} from "@/config/api";
-import { ICompany } from "@/types/backend";
-import { v4 as uuidv4 } from "uuid";
-import enUS from "antd/lib/locale/en_US";
+} from '@/config/api';
+import { ICompany } from '@/types/backend';
+import { v4 as uuidv4 } from 'uuid';
+import enUS from 'antd/lib/locale/en_US';
 
 interface IProps {
   openModal: boolean;
@@ -56,15 +56,15 @@ const ModalCompany = (props: IProps) => {
   const { openModal, setOpenModal, reloadTable, dataInit, setDataInit } = props;
 
   //modal animation
-  const [animation, setAnimation] = useState<string>("open");
+  const [animation, setAnimation] = useState<string>('open');
 
   const [loadingUpload, setLoadingUpload] = useState<boolean>(false);
   const [dataLogo, setDataLogo] = useState<ICompanyLogo[]>([]);
   const [previewOpen, setPreviewOpen] = useState(false);
-  const [previewImage, setPreviewImage] = useState("");
-  const [previewTitle, setPreviewTitle] = useState("");
+  const [previewImage, setPreviewImage] = useState('');
+  const [previewTitle, setPreviewTitle] = useState('');
 
-  const [value, setValue] = useState<string>("");
+  const [value, setValue] = useState<string>('');
   const [form] = Form.useForm();
 
   useEffect(() => {
@@ -77,7 +77,7 @@ const ModalCompany = (props: IProps) => {
     const { name, address } = valuesForm;
 
     if (dataLogo.length === 0) {
-      message.error("Vui lòng upload ảnh Logo");
+      message.error('Vui lòng upload ảnh Logo');
       return;
     }
 
@@ -91,12 +91,12 @@ const ModalCompany = (props: IProps) => {
         dataLogo[0].name
       );
       if (res.data) {
-        message.success("Cập nhật company thành công");
+        message.success('Cập nhật company thành công');
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: "Có lỗi xảy ra",
+          message: 'Có lỗi xảy ra',
           description: res.message,
         });
       }
@@ -109,12 +109,12 @@ const ModalCompany = (props: IProps) => {
         dataLogo[0].name
       );
       if (res.data) {
-        message.success("Thêm mới company thành công");
+        message.success('Thêm mới company thành công');
         handleReset();
         reloadTable();
       } else {
         notification.error({
-          message: "Có lỗi xảy ra",
+          message: 'Có lỗi xảy ra',
           description: res.message,
         });
       }
@@ -123,16 +123,17 @@ const ModalCompany = (props: IProps) => {
 
   const handleReset = async () => {
     form.resetFields();
-    setValue("");
+    setValue('');
     setDataInit(null);
 
     //add animation when closing modal
-    setAnimation("close");
+    setAnimation('close');
     await new Promise((r) => setTimeout(r, 400));
     setOpenModal(false);
-    setAnimation("open");
+    setAnimation('open');
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleRemoveFile = (file: any) => {
     setDataLogo([]);
   };
@@ -142,7 +143,7 @@ const ModalCompany = (props: IProps) => {
       setPreviewImage(file.url);
       setPreviewOpen(true);
       setPreviewTitle(
-        file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+        file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
       );
       return;
     }
@@ -150,46 +151,46 @@ const ModalCompany = (props: IProps) => {
       setPreviewImage(url);
       setPreviewOpen(true);
       setPreviewTitle(
-        file.name || file.url.substring(file.url.lastIndexOf("/") + 1)
+        file.name || file.url.substring(file.url.lastIndexOf('/') + 1)
       );
     });
   };
 
   const getBase64 = (img: any, callback: any) => {
     const reader = new FileReader();
-    reader.addEventListener("load", () => callback(reader.result));
+    reader.addEventListener('load', () => callback(reader.result));
     reader.readAsDataURL(img);
   };
 
   const beforeUpload = (file: any) => {
-    const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
+    const isJpgOrPng = file.type === 'image/jpeg' || file.type === 'image/png';
     if (!isJpgOrPng) {
-      message.error("You can only upload JPG/PNG file!");
+      message.error('You can only upload JPG/PNG file!');
     }
     const isLt2M = file.size / 1024 / 1024 < 2;
     if (!isLt2M) {
-      message.error("Image must smaller than 2MB!");
+      message.error('Image must smaller than 2MB!');
     }
     return isJpgOrPng && isLt2M;
   };
 
   const handleChange = (info: any) => {
-    if (info.file.status === "uploading") {
+    if (info.file.status === 'uploading') {
       setLoadingUpload(true);
     }
-    if (info.file.status === "done") {
+    if (info.file.status === 'done') {
       setLoadingUpload(false);
     }
-    if (info.file.status === "error") {
+    if (info.file.status === 'error') {
       setLoadingUpload(false);
       message.error(
-        info?.file?.error?.event?.message ?? "Đã có lỗi xảy ra khi upload file."
+        info?.file?.error?.event?.message ?? 'Đã có lỗi xảy ra khi upload file.'
       );
     }
   };
 
   const handleUploadFileLogo = async ({ file, onSuccess, onError }: any) => {
-    const res = await callUploadSingleFile(file, "company");
+    const res = await callUploadSingleFile(file, 'company');
     if (res && res.data) {
       setDataLogo([
         {
@@ -197,7 +198,7 @@ const ModalCompany = (props: IProps) => {
           uid: uuidv4(),
         },
       ]);
-      if (onSuccess) onSuccess("ok");
+      if (onSuccess) onSuccess('ok');
     } else {
       if (onError) {
         setDataLogo([]);
@@ -213,7 +214,7 @@ const ModalCompany = (props: IProps) => {
         <>
           <ModalForm
             title={
-              <>{dataInit?._id ? "Cập nhật Company" : "Tạo mới Company"}</>
+              <>{dataInit?._id ? 'Cập nhật Company' : 'Tạo mới Company'}</>
             }
             open={openModal}
             modalProps={{
@@ -222,7 +223,7 @@ const ModalCompany = (props: IProps) => {
               },
               afterClose: () => handleReset(),
               destroyOnClose: true,
-              width: isMobile ? "100%" : 900,
+              width: isMobile ? '100%' : 900,
               footer: null,
               keyboard: false,
               maskClosable: false,
@@ -242,8 +243,8 @@ const ModalCompany = (props: IProps) => {
                 icon: <CheckSquareOutlined />,
               },
               searchConfig: {
-                resetText: "Hủy",
-                submitText: <>{dataInit?._id ? "Cập nhật" : "Tạo mới"}</>,
+                resetText: 'Hủy',
+                submitText: <>{dataInit?._id ? 'Cập nhật' : 'Tạo mới'}</>,
               },
             }}
           >
@@ -253,7 +254,7 @@ const ModalCompany = (props: IProps) => {
                   label="Tên công ty"
                   name="name"
                   rules={[
-                    { required: true, message: "Vui lòng không bỏ trống" },
+                    { required: true, message: 'Vui lòng không bỏ trống' },
                   ]}
                   placeholder="Nhập tên công ty"
                 />
@@ -266,7 +267,7 @@ const ModalCompany = (props: IProps) => {
                   rules={[
                     {
                       required: true,
-                      message: "Vui lòng không bỏ trống",
+                      message: 'Vui lòng không bỏ trống',
                       validator: () => {
                         if (dataLogo.length > 0) return Promise.resolve();
                         else return Promise.reject(false);
@@ -291,8 +292,8 @@ const ModalCompany = (props: IProps) => {
                           ? [
                               {
                                 uid: uuidv4(),
-                                name: dataInit?.logo ?? "",
-                                status: "done",
+                                name: dataInit?.logo ?? '',
+                                status: 'done',
                                 url: `${
                                   import.meta.env.VITE_BACKEND_URL
                                 }/images/company/${dataInit?.logo}`,
@@ -315,7 +316,7 @@ const ModalCompany = (props: IProps) => {
                   label="Địa chỉ"
                   name="address"
                   rules={[
-                    { required: true, message: "Vui lòng không bỏ trống" },
+                    { required: true, message: 'Vui lòng không bỏ trống' },
                   ]}
                   placeholder="Nhập địa chỉ công ty"
                   fieldProps={{
@@ -327,7 +328,7 @@ const ModalCompany = (props: IProps) => {
               <ProCard
                 title="Miêu tả"
                 // subTitle="mô tả công ty"
-                headStyle={{ color: "#d81921" }}
+                headStyle={{ color: '#d81921' }}
                 style={{ marginBottom: 20 }}
                 headerBordered
                 size="small"
@@ -346,7 +347,7 @@ const ModalCompany = (props: IProps) => {
             onCancel={() => setPreviewOpen(false)}
             style={{ zIndex: 1500 }}
           >
-            <img alt="example" style={{ width: "100%" }} src={previewImage} />
+            <img alt="example" style={{ width: '100%' }} src={previewImage} />
           </Modal>
         </>
       )}

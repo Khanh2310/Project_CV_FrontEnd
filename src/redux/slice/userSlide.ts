@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { callFetchUser } from "@/config/api";
-import { IUser } from "@/types/backend";
+import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { callFetchUser } from '@/config/api';
+import { IUser } from '@/types/backend';
 
 interface IState {
   isFetching: boolean;
@@ -14,7 +14,7 @@ interface IState {
 }
 // First, create the thunk
 export const fetchUser = createAsyncThunk(
-  "user/fetchUser",
+  'user/fetchUser',
   async ({ query }: { query: string }) => {
     const response = await callFetchUser(query);
     return response;
@@ -33,7 +33,7 @@ const initialState: IState = {
 };
 
 export const userSlide = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   // The `reducers` field lets us define reducers and generate associated actions
   reducers: {
