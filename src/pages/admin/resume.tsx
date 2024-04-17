@@ -1,12 +1,12 @@
-import DataTable from "@/components/client/data-table";
-import { useAppDispatch, useAppSelector } from "@/redux/hooks";
-import { IResume } from "@/types/backend";
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import DataTable from '@/components/client/data-table';
+import { useAppDispatch, useAppSelector } from '@/redux/hooks';
+import { IResume } from '@/types/backend';
+import { DeleteOutlined, EditOutlined, PlusOutlined } from '@ant-design/icons';
 import {
   ActionType,
   ProColumns,
   ProFormSelect,
-} from "@ant-design/pro-components";
+} from '@ant-design/pro-components';
 import {
   Button,
   Popconfirm,
@@ -15,14 +15,14 @@ import {
   Tag,
   message,
   notification,
-} from "antd";
-import { useState, useRef } from "react";
-import dayjs from "dayjs";
-import { callDeleteResume } from "@/config/api";
-import queryString from "query-string";
-import { useNavigate } from "react-router-dom";
-import { fetchResume } from "@/redux/slice/resumeSlide";
-import ViewDetailResume from "@/components/admin/resume/view.resume";
+} from 'antd';
+import { useState, useRef } from 'react';
+import dayjs from 'dayjs';
+import { callDeleteResume } from '@/config/api';
+import queryString from 'query-string';
+import { useNavigate } from 'react-router-dom';
+import { fetchResume } from '@/redux/slice/resumeSlide';
+import ViewDetailResume from '@/components/admin/resume/view.resume';
 
 const ResumePage = () => {
   const tableRef = useRef<ActionType>();
@@ -39,11 +39,11 @@ const ResumePage = () => {
     if (_id) {
       const res = await callDeleteResume(_id);
       if (res && res.data) {
-        message.success("Xóa Resume thành công");
+        message.success('Xóa Resume thành công');
         reloadTable();
       } else {
         notification.error({
-          message: "Có lỗi xảy ra",
+          message: 'Có lỗi xảy ra',
           description: res.message,
         });
       }
@@ -56,8 +56,8 @@ const ResumePage = () => {
 
   const columns: ProColumns<IResume>[] = [
     {
-      title: "Id",
-      dataIndex: "_id",
+      title: 'Id',
+      dataIndex: '_id',
       width: 250,
       render: (text, record, index, action) => {
         return (
@@ -75,8 +75,8 @@ const ResumePage = () => {
       hideInSearch: true,
     },
     {
-      title: "Trạng Thái",
-      dataIndex: "status",
+      title: 'Trạng Thái',
+      dataIndex: 'status',
       sorter: true,
       renderFormItem: (item, props, form) => (
         <ProFormSelect
@@ -84,10 +84,10 @@ const ResumePage = () => {
           mode="multiple"
           allowClear
           valueEnum={{
-            PENDING: "PENDING",
-            REVIEWING: "REVIEWING",
-            APPROVED: "APPROVED",
-            REJECTED: "REJECTED",
+            PENDING: 'PENDING',
+            REVIEWING: 'REVIEWING',
+            APPROVED: 'APPROVED',
+            REJECTED: 'REJECTED',
           }}
           placeholder="Chọn level"
         />
@@ -95,99 +95,59 @@ const ResumePage = () => {
     },
 
     {
-      title: "Job",
-      dataIndex: ["jobId", "name"],
+      title: 'Job',
+      dataIndex: ['jobId', 'name'],
       hideInSearch: true,
     },
     {
-      title: "Company",
-      dataIndex: ["companyId", "name"],
+      title: 'Company',
+      dataIndex: ['companyId', 'name'],
       hideInSearch: true,
     },
 
     {
-      title: "CreatedAt",
-      dataIndex: "createdAt",
+      title: 'CreatedAt',
+      dataIndex: 'createdAt',
       width: 200,
       sorter: true,
       render: (text, record, index, action) => {
-        return <>{dayjs(record.createdAt).format("DD-MM-YYYY HH:mm:ss")}</>;
+        return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
       hideInSearch: true,
     },
     {
-      title: "UpdatedAt",
-      dataIndex: "updatedAt",
+      title: 'UpdatedAt',
+      dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
       render: (text, record, index, action) => {
-        return <>{dayjs(record.updatedAt).format("DD-MM-YYYY HH:mm:ss")}</>;
+        return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
       hideInSearch: true,
     },
-    // {
-
-    //     title: 'Actions',
-    //     hideInSearch: true,
-    //     width: 50,
-    //     render: (_value, entity, _index, _action) => (
-    //         <Space>
-    //             <EditOutlined
-    //                 style={{
-    //                     fontSize: 20,
-    //                     color: '#ffa500',
-    //                 }}
-    //                 type=""
-    //                 onClick={() => {
-    //                     navigate(`/admin/job/upsert?id=${entity._id}`)
-    //                 }}
-    //             />
-
-    //             <Popconfirm
-    //                 placement="leftTop"
-    //                 title={"Xác nhận xóa resume"}
-    //                 description={"Bạn có chắc chắn muốn xóa resume này ?"}
-    //                 onConfirm={() => handleDeleteResume(entity._id)}
-    //                 okText="Xác nhận"
-    //                 cancelText="Hủy"
-    //             >
-    //                 <span style={{ cursor: "pointer", margin: "0 10px" }}>
-    //                     <DeleteOutlined
-    //                         style={{
-    //                             fontSize: 20,
-    //                             color: '#ff4d4f',
-    //                         }}
-    //                     />
-    //                 </span>
-    //             </Popconfirm>
-    //         </Space>
-    //     ),
-
-    // },
   ];
 
   const buildQuery = (params: any, sort: any, filter: any) => {
     const clone = { ...params };
-    // if (clone.name) clone.name = `/${clone.name}/i`;
-    // if (clone.salary) clone.salary = `/${clone.salary}/i`;
+
     if (clone?.status?.length) {
-      clone.status = clone.status.join(",");
+      clone.status = clone.status.join(',');
     }
 
     let temp = queryString.stringify(clone);
 
-    let sortBy = "";
+    let sortBy = '';
     if (sort && sort.status) {
-      sortBy = sort.status === "ascend" ? "sort=status" : "sort=-status";
+      sortBy = sort.status === 'ascend' ? 'sort=status' : 'sort=-status';
     }
 
     if (sort && sort.createdAt) {
       sortBy =
-        sort.createdAt === "ascend" ? "sort=createdAt" : "sort=-createdAt";
+        sort.createdAt === 'ascend' ? 'sort=createdAt' : 'sort=-createdAt';
     }
     if (sort && sort.updatedAt) {
       sortBy =
-        sort.updatedAt === "ascend" ? "sort=updatedAt" : "sort=-updatedAt";
+        sort.updatedAt === 'ascend' ? 'sort=updatedAt' : 'sort=-updatedAt';
     }
 
     //mặc định sort theo updatedAt
@@ -198,7 +158,7 @@ const ResumePage = () => {
     }
 
     temp +=
-      "&populate=companyId,jobId&fields=companyId._id, companyId.name, companyId.logo, jobId._id, jobId.name";
+      '&populate=companyId,jobId&fields=companyId._id, companyId.name, companyId.logo, jobId._id, jobId.name';
     return temp;
   };
 
@@ -224,13 +184,14 @@ const ResumePage = () => {
           showTotal: (total, range) => {
             return (
               <div>
-                {" "}
+                {' '}
                 {range[0]}-{range[1]} trên {total} rows
               </div>
             );
           },
         }}
         rowSelection={false}
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
         toolBarRender={(_action, _rows): any => {
           return <></>;
         }}

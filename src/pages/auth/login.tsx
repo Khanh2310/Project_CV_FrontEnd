@@ -17,7 +17,6 @@ const LoginPage = () => {
   const callback = params?.get('callback');
 
   useEffect(() => {
-    //đã login => redirect to '/'
     if (localStorage.getItem('access_token')) {
       window.location.href = '/';
     }
