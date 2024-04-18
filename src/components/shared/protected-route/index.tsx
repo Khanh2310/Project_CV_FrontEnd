@@ -4,43 +4,39 @@ import NotPermitted from "./not-permitted";
 import Loading from "../loading";
 
 const RoleBaseRoute = (props: any) => {
-  const isAdminRoute = window.location.pathname.startsWith("/admin");
-  const user = useAppSelector((state) => state.account.user);
-  const userRole = user.role;
+    const user = useAppSelector(state => state.account.user);
+    const userRole = user.role.name;
 
-  if (
-    (isAdminRoute && userRole === "ADMIN") ||
-    (!isAdminRoute && (userRole === "USER" || userRole === "ADMIN"))
-  ) {
-    return <>{props.children}</>;
-  } else {
-    return <NotPermitted />;
-  }
-};
+    if (userRole !== 'NORMAL_USER') {
+        return (<>{props.children}</>)
+    } else {
+        return (<NotPermitted />)
+    }
+}
 
 const ProtectedRoute = (props: any) => {
-  const isAuthenticated = useAppSelector(
-    (state) => state.account.isAuthenticated
-  );
-  const isLoading = useAppSelector((state) => state.account.isLoading);
+    const isAuthenticated = useAppSelector(state => state.account.isAuthenticated)
+    const isLoading = useAppSelector(state => state.account.isLoading)
 
-  return (
-    <>
-      {isLoading === true ? (
-        <Loading />
-      ) : (
+    return (
         <>
-          {isAuthenticated === true ? (
-            <>
-              <RoleBaseRoute>{props.children}</RoleBaseRoute>
-            </>
-          ) : (
-            <Navigate to="/login" replace />
-          )}
+            {isLoading === true ?
+                <Loading />
+                :
+                <>
+                    {isAuthenticated === true ?
+                        <>
+                            <RoleBaseRoute>
+                                {props.children}
+                            </RoleBaseRoute>
+                        </>
+                        :
+                        <Navigate to='/login' replace />
+                    }
+                </>
+            }
         </>
-      )}
-    </>
-  );
-};
+    )
+}
 
 export default ProtectedRoute;

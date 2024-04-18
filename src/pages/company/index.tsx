@@ -2,7 +2,6 @@ import { Col, Row } from 'antd';
 import styles from 'styles/client.module.scss';
 import CompanyCard from '@/components/client/card/company.card';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClientCompanyPage = (props: any) => {
     return (
         <div className={styles["container"]} style={{ marginTop: 20 }}>

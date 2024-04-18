@@ -12,6 +12,7 @@ import { fetchPermission } from "@/redux/slice/permissionSlide";
 import ViewDetailPermission from "@/components/admin/permission/view.permission";
 import ModalPermission from "@/components/admin/permission/modal.permission";
 import { colorMethod } from "@/config/utils";
+
 import { ALL_PERMISSIONS } from "@/config/permissions";
 import Access from "@/components/shared/access";
 

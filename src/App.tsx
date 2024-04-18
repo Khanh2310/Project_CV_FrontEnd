@@ -26,12 +26,12 @@ import ClientJobPage from './pages/job';
 import ClientJobDetailPage from './pages/job/detail';
 import ClientCompanyPage from './pages/company';
 import ClientCompanyDetailPage from './pages/company/detail';
-import LayoutApp from './components/shared/layout.app';
 import NotFound from './components/shared/not.found';
 import ProtectedRoute from './components/shared/protected-route';
+import LayoutApp from './components/shared/layout.app';
 
 const LayoutClient = () => {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const location = useLocation();
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -108,7 +108,7 @@ export default function App() {
         },
 
         {
-          path: 'job',
+          path: "job",
           children: [
             {
               index: true,
@@ -147,12 +147,12 @@ export default function App() {
 
 
     {
-      path: '/login',
+      path: "/login",
       element: <LoginPage />,
     },
 
     {
-      path: '/register',
+      path: "/register",
       element: <RegisterPage />,
     },
   ]);
