@@ -21,7 +21,7 @@ const NO_RETRY_HEADER = 'x-no-retry';
 
 const handleRefreshToken = async (): Promise<string | null> => {
     return await mutex.runExclusive(async () => {
-        const res = await instance.get<IBackendRes<AccessTokenResponse>>('/api/v1/auth/refresh');
+        const res = await instance.get<IBackendRes<AccessTokenResponse>>('/v1/api/auth/refresh');
         if (res && res.data) return res.data.access_token;
         else return null;
     });
@@ -47,7 +47,7 @@ instance.interceptors.response.use(
     async (error) => {
         if (error.config && error.response
             && +error.response.status === 401
-            && error.config.url !== '/api/v1/auth/login'
+            && error.config.url !== '/v1/api/auth/login'
             && !error.config.headers[NO_RETRY_HEADER]
         ) {
             const access_token = await handleRefreshToken();
@@ -62,7 +62,7 @@ instance.interceptors.response.use(
         if (
             error.config && error.response
             && +error.response.status === 400
-            && error.config.url === '/api/v1/auth/refresh'
+            && error.config.url === '/v1/api/auth/refresh'
             && location.pathname.startsWith("/admin")
         ) {
             const message = error?.response?.data?.message ?? "Có lỗi xảy ra, vui lòng login.";
