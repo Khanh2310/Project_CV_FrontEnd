@@ -14,6 +14,7 @@ import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from "@/types/backend";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ViewUpsertJob = (props: any) => {
     const [companies, setCompanies] = useState<ICompanySelect[]>([]);
 

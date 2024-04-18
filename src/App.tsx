@@ -31,7 +31,7 @@ import NotFound from './components/shared/not.found';
 import ProtectedRoute from './components/shared/protected-route';
 
 const LayoutClient = () => {
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
   const location = useLocation();
   const rootRef = useRef<HTMLDivElement>(null);
 
@@ -108,7 +108,7 @@ export default function App() {
         },
 
         {
-          path: "job",
+          path: 'job',
           children: [
             {
               index: true,
@@ -147,12 +147,12 @@ export default function App() {
 
 
     {
-      path: "/login",
+      path: '/login',
       element: <LoginPage />,
     },
 
     {
-      path: "/register",
+      path: '/register',
       element: <RegisterPage />,
     },
   ]);

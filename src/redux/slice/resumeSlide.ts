@@ -12,7 +12,6 @@ interface IState {
     },
     result: IResume[]
 }
-// First, create the thunk
 export const fetchResume = createAsyncThunk(
     'resume/fetchResume',
     async ({ query }: { query: string }) => {

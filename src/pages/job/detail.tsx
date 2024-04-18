@@ -13,6 +13,7 @@ import ApplyModal from "@/components/client/modal/apply.modal";
 dayjs.extend(relativeTime)
 
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClientJobDetailPage = (props: any) => {
     const [jobDetail, setJobDetail] = useState<IJob | null>(null);
     const [isLoading, setIsLoading] = useState<boolean>(false);

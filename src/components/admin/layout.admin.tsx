@@ -23,7 +23,7 @@ import type { MenuProps } from 'antd';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import { ALL_PERMISSIONS } from '@/config/permissions';
 
-const { Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 
 const LayoutAdmin = () => {
     const location = useLocation();

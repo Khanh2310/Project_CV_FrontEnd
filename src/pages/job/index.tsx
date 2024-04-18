@@ -3,6 +3,7 @@ import { Col, Divider, Row } from 'antd';
 import styles from 'styles/client.module.scss';
 import JobCard from '@/components/client/card/job.card';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClientJobPage = (props: any) => {
     return (
         <div className={styles["container"]} style={{ marginTop: 20 }}>
