@@ -5,18 +5,22 @@ import JobCard from '@/components/client/card/job.card';
 import CompanyCard from '@/components/client/card/company.card';
 
 const HomePage = () => {
-    return (
-        <div className={`${styles["container"]} ${styles["home-section"]}`}>
-            <div className="search-content" style={{ marginTop: 20 }}>
-                <SearchClient />
-            </div>
-            <Divider />
-            <CompanyCard />
-            <div style={{ margin: 50 }}></div>
-            <Divider />
-            <JobCard />
+  return (
+    <>
+      <div className={`search-content pt-5 ${styles['bgColor']} `}>
+        <div className={`${styles['container']}`}>
+          <SearchClient />
         </div>
-    )
-}
+      </div>
+      <div className={`${styles['container']} ${styles['home-section']}`}>
+        <Divider />
+        <CompanyCard />
+        <div style={{ margin: 50 }}></div>
+        <Divider />
+        <JobCard />
+      </div>
+    </>
+  );
+};
 
 export default HomePage;
