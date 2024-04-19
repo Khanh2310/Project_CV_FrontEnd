@@ -7,7 +7,9 @@ import CompanyCard from '@/components/client/card/company.card';
 const HomePage = () => {
   return (
     <>
-      <div className={`search-content pt-5 ${styles['bgColor']} `}>
+      <div
+        className={`search-content  md:px-16 md:py-16 ${styles['bgColor']} `}
+      >
         <div className={`${styles['container']}`}>
           <SearchClient />
         </div>

@@ -19,6 +19,7 @@ import { useAppDispatch, useAppSelector } from '@/redux/hooks';
 import { callLogout } from '@/config/api';
 import { setLogoutAction } from '@/redux/slice/accountSlide';
 import ManageAccount from './modal/manage.account';
+import { AntConfigProvider } from '../admin/config/ant/AntConfigProvider';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const Header = (props: any) => {
@@ -112,7 +113,7 @@ const Header = (props: any) => {
                 <FaReact onClick={() => navigate('/')} title="" />
               </div>
               <div className={styles['top-menu']}>
-                <ConfigProvider
+                <AntConfigProvider
                   theme={{
                     token: {
                       colorPrimary: '#fff',
@@ -127,7 +128,23 @@ const Header = (props: any) => {
                     mode="horizontal"
                     items={items}
                   />
-                </ConfigProvider>
+                </AntConfigProvider>
+                {/* <ConfigProvider
+                  theme={{
+                    token: {
+                      colorPrimary: '#fff',
+                      colorBgContainer: '',
+                      colorText: '#a7a7a7',
+                    },
+                  }}
+                >
+                  <Menu
+                    // onClick={onClick}
+                    selectedKeys={[current]}
+                    mode="horizontal"
+                    items={items}
+                  />
+                </ConfigProvider> */}
                 <div className={styles['extra']}>
                   {isAuthenticated === false ? (
                     <Link to={'/login'}>Đăng Nhập</Link>
