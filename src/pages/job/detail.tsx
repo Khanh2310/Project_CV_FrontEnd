@@ -16,14 +16,15 @@ import relativeTime from 'dayjs/plugin/relativeTime';
 import ApplyModal from '@/components/client/modal/apply.modal';
 dayjs.extend(relativeTime);
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ClientJobDetailPage = (props: any) => {
   const [jobDetail, setJobDetail] = useState<IJob | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const id = params?.get('id'); // job id
 
   useEffect(() => {
