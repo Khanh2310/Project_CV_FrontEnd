@@ -1,5 +1,5 @@
 import { callFetchJob } from '@/config/api';
-import { LOCATION_LIST, convertSlug, getLocationName } from '@/config/utils';
+import { convertSlug, getLocationName } from '@/config/utils';
 import { IJob } from '@/types/backend';
 import { EnvironmentOutlined, ThunderboltOutlined } from '@ant-design/icons';
 import { Card, Col, Empty, Pagination, Row, Spin } from 'antd';
@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
-import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
+import dayjs from 'dayjs';
 dayjs.extend(relativeTime);
 
 interface IProps {
@@ -24,13 +24,16 @@ const JobCard = (props: IProps) => {
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(5);
   const [total, setTotal] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filter, setFilter] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
 
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchJob();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, pageSize, filter, sortQuery]);
 
   const fetchJob = async () => {
@@ -119,7 +122,7 @@ const JobCard = (props: IProps) => {
                           đ
                         </div>
                         <div className={styles['job-updatedAt']}>
-                          {dayjs(item.updatedAt).fromNow()}
+                          {dayjs(item.updatedAt).locale('en').fromNow()}
                         </div>
                       </div>
                     </div>

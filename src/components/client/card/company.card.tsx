@@ -19,12 +19,15 @@ const CompanyCard = (props: IProps) => {
   const [current, setCurrent] = useState(1);
   const [pageSize, setPageSize] = useState(4);
   const [total, setTotal] = useState(0);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [filter, setFilter] = useState('');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
   const navigate = useNavigate();
 
   useEffect(() => {
     fetchCompany();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [current, pageSize, filter, sortQuery]);
 
   const fetchCompany = async () => {

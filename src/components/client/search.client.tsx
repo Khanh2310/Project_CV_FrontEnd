@@ -1,9 +1,5 @@
 import { Button, Col, Form, Row, Select } from 'antd';
-import {
-  EnvironmentOutlined,
-  MonitorOutlined,
-  SearchOutlined,
-} from '@ant-design/icons';
+import { EnvironmentOutlined, SearchOutlined } from '@ant-design/icons';
 import { LOCATION_LIST, SKILLS_LIST } from '@/config/utils';
 import { ProForm } from '@ant-design/pro-components';
 import { AntConfigProvider } from '../admin/config/ant/AntConfigProvider';
@@ -43,13 +39,11 @@ const SearchClient = () => {
             >
               <Select
                 size="large"
-                // mode="multiple"
                 allowClear
                 showArrow={false}
                 style={{ width: '100%', height: '56px' }}
                 placeholder={
                   <span className="text-lg font-medium">
-                    {/* <MonitorOutlined /> */}
                     Enter keyword skill (Java, iOS...), job title, company...
                   </span>
                 }
@@ -63,7 +57,6 @@ const SearchClient = () => {
           <ProForm.Item name="location">
             <Select
               size="large"
-              // mode="multiple"
               allowClear
               showArrow={false}
               style={{ width: '100%', height: '56px' }}
@@ -78,15 +71,6 @@ const SearchClient = () => {
           </ProForm.Item>
         </Col>
         <Col span={12} md={4}>
-          {/* <div className="flex items-center justify-center text-white bg-[#ed1b2f] rounded-md">
-            <SearchOutlined />
-            <Button
-              className="bg-[#ed1b2f] border-[#ed1b2f] outline-none hover:bg-[#ed1b2f]"
-              onClick={() => form.submit()}
-            >
-              Search
-            </Button>
-          </div> */}
           <AntConfigProvider
             theme={{
               token: {

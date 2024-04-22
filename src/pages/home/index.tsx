@@ -3,6 +3,10 @@ import styles from 'styles/client.module.scss';
 import SearchClient from '@/components/client/search.client';
 import JobCard from '@/components/client/card/job.card';
 import CompanyCard from '@/components/client/card/company.card';
+import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
+dayjs.extend(relativeTime);
+dayjs.locale('en');
 
 const HomePage = () => {
   return (

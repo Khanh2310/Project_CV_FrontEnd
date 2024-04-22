@@ -9,7 +9,7 @@ import {
   TwitterOutlined,
 } from '@ant-design/icons';
 import { Avatar, Drawer, Dropdown, MenuProps, Space, message } from 'antd';
-import { Menu, ConfigProvider } from 'antd';
+import { Menu } from 'antd';
 import styles from '@/styles/client.module.scss';
 import { isMobile } from 'react-device-detect';
 import { FaReact } from 'react-icons/fa';
@@ -44,17 +44,17 @@ const Header = (props: any) => {
   const items: MenuProps['items'] = [
     {
       label: <Link to={'/'}>Trang Chủ</Link>,
-      key: '/',
+      key: 'home',
       icon: <TwitterOutlined />,
     },
     {
       label: <Link to={'/job'}>Việc Làm IT</Link>,
-      key: '/job',
+      key: 'job',
       icon: <CodeOutlined />,
     },
     {
       label: <Link to={'/company'}>Top Công ty IT</Link>,
-      key: '/company',
+      key: 'company',
       icon: <RiseOutlined />,
     },
   ];
@@ -123,28 +123,13 @@ const Header = (props: any) => {
                   }}
                 >
                   <Menu
-                    // onClick={onClick}
                     selectedKeys={[current]}
                     mode="horizontal"
                     items={items}
+                    style={{ minWidth: '800px' }}
                   />
                 </AntConfigProvider>
-                {/* <ConfigProvider
-                  theme={{
-                    token: {
-                      colorPrimary: '#fff',
-                      colorBgContainer: '',
-                      colorText: '#a7a7a7',
-                    },
-                  }}
-                >
-                  <Menu
-                    // onClick={onClick}
-                    selectedKeys={[current]}
-                    mode="horizontal"
-                    items={items}
-                  />
-                </ConfigProvider> */}
+
                 <div className={styles['extra']}>
                   {isAuthenticated === false ? (
                     <Link to={'/login'}>Đăng Nhập</Link>
@@ -153,7 +138,11 @@ const Header = (props: any) => {
                       menu={{ items: itemsDropdown }}
                       trigger={['click']}
                     >
-                      <Space style={{ cursor: 'pointer' }}>
+                      <Space
+                        style={{
+                          cursor: 'pointer',
+                        }}
+                      >
                         <span>Welcome {user?.name}</span>
                         <Avatar>
                           {' '}
