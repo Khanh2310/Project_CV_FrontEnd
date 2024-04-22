@@ -44,17 +44,17 @@ const Header = (props: any) => {
   const items: MenuProps['items'] = [
     {
       label: <Link to={'/'}>Trang Chủ</Link>,
-      key: 'home',
+      key: '/',
       icon: <TwitterOutlined />,
     },
     {
       label: <Link to={'/job'}>Việc Làm IT</Link>,
-      key: 'job',
+      key: '/job',
       icon: <CodeOutlined />,
     },
     {
       label: <Link to={'/company'}>Top Công ty IT</Link>,
-      key: 'company',
+      key: '/company',
       icon: <RiseOutlined />,
     },
   ];
@@ -126,7 +126,7 @@ const Header = (props: any) => {
                     selectedKeys={[current]}
                     mode="horizontal"
                     items={items}
-                    style={{ minWidth: '800px' }}
+                    className="md:min-w-[800px]"
                   />
                 </AntConfigProvider>
 
