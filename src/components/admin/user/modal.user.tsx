@@ -74,10 +74,10 @@ const ModalUser = (props: IProps) => {
         age,
         gender,
         address,
-        role: role.value,
+        role: role._id,
         company: {
-          _id: company.value,
-          name: company.label,
+          _id: company._id,
+          name: company.name,
         },
       };
 
