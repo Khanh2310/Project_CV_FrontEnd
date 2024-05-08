@@ -9,11 +9,12 @@ import {
   IResume,
   IPermission,
   IRole,
+  ISubscribers,
 } from '@/types/backend';
 import axios from 'config/axios-customize';
 
 /**
- * 
+ *
 Module Auth
  */
 export const callRegister = (
@@ -71,7 +72,7 @@ export const callUploadSingleFile = (file: any, folderType: string) => {
 };
 
 /**
- * 
+ *
 Module Company
  */
 export const callCreateCompany = (
@@ -118,7 +119,7 @@ export const callFetchCompanyById = (id: string) => {
 };
 
 /**
- * 
+ *
 Module User
  */
 export const callCreateUser = (user: IUser) => {
@@ -140,7 +141,7 @@ export const callFetchUser = (query: string) => {
 };
 
 /**
- * 
+ *
 Module Job
  */
 export const callCreateJob = (job: IJob) => {
@@ -164,7 +165,7 @@ export const callFetchJobById = (id: string) => {
 };
 
 /**
- * 
+ *
 Module Resume
  */
 export const callCreateResume = (url: string, companyId: any, jobId: any) => {
@@ -198,7 +199,7 @@ export const callFetchResumeByUser = () => {
 };
 
 /**
- * 
+ *
 Module Permission
  */
 export const callCreatePermission = (permission: IPermission) => {
@@ -228,7 +229,7 @@ export const callFetchPermissionById = (id: string) => {
 };
 
 /**
- * 
+ *
 Module Role
  */
 export const callCreateRole = (role: IRole) => {
@@ -251,4 +252,38 @@ export const callFetchRole = (query: string) => {
 
 export const callFetchRoleById = (id: string) => {
   return axios.get<IBackendRes<IRole>>(`/v1/api/roles/${id}`);
+};
+
+/**
+ *
+Module Subscribers
+ */
+export const callCreateSubscriber = (subs: ISubscribers) => {
+  return axios.post<IBackendRes<ISubscribers>>('/v1/api/subscribers', {
+    ...subs,
+  });
+};
+
+export const callGetSubscriberSkills = () => {
+  return axios.post<IBackendRes<ISubscribers>>('/v1/api/subscribers/skills');
+};
+
+export const callUpdateSubscriber = (subs: ISubscribers) => {
+  return axios.patch<IBackendRes<ISubscribers>>(`/v1/api/subscribers`, {
+    ...subs,
+  });
+};
+
+export const callDeleteSubscriber = (id: string) => {
+  return axios.delete<IBackendRes<ISubscribers>>(`/v1/api/subscribers/${id}`);
+};
+
+export const callFetchSubscriber = (query: string) => {
+  return axios.get<IBackendRes<IModelPaginate<ISubscribers>>>(
+    `/v1/api/subscribers?${query}`
+  );
+};
+
+export const callFetchSubscriberById = (id: string) => {
+  return axios.get<IBackendRes<ISubscribers>>(`/v1/api/subscribers/${id}`);
 };

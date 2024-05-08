@@ -1,11 +1,31 @@
-import { Modal, Table, Tabs } from 'antd';
+import {
+  Button,
+  Checkbox,
+  Col,
+  Form,
+  Modal,
+  Row,
+  Select,
+  Table,
+  Tabs,
+  message,
+  notification,
+} from 'antd';
 import { isMobile } from 'react-device-detect';
 import type { TabsProps } from 'antd';
 import { IResume } from '@/types/backend';
 import { useState, useEffect } from 'react';
-import { callFetchResumeByUser } from '@/config/api';
+import {
+  callFetchResumeByUser,
+  callGetSubscriberSkills,
+  callUpdateSubscriber,
+} from '@/config/api';
 import type { ColumnsType } from 'antd/es/table';
 import dayjs from 'dayjs';
+import { MonitorOutlined } from '@ant-design/icons';
+import { SKILLS_LIST } from '@/config/utils';
+import { useAppSelector } from '@/redux/hooks';
+import { AntConfigProvider } from '@/components/admin/config/ant/AntConfigProvider';
 
 interface IProps {
   open: boolean;
@@ -54,14 +74,16 @@ const UserResume = (props: any) => {
     {
       title: 'Ngày rải CV',
       dataIndex: 'createdAt',
-      render(value, record) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      render(value, record, index) {
         return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
     },
     {
       title: '',
       dataIndex: '',
-      render(value, record) {
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      render(value, record, index) {
         return (
           <a
             href={`${import.meta.env.VITE_BACKEND_URL}/images/resume/${
@@ -88,14 +110,133 @@ const UserResume = (props: any) => {
   );
 };
 
-const UserUpdateInfo = () => {
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const UserUpdateInfo = (props: any) => {
   return <div>//todo</div>;
+};
+
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+const JobByEmail = (props: any) => {
+  const [form] = Form.useForm();
+  const user = useAppSelector((state) => state.account.user);
+
+  useEffect(() => {
+    const init = async () => {
+      const res = await callGetSubscriberSkills();
+      if (res && res.data) {
+        form.setFieldValue('skills', res.data.skills);
+      }
+    };
+    init();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const onFinish = async (values: any) => {
+    const { skills } = values;
+    const res = await callUpdateSubscriber({
+      email: user.email,
+      name: user.name,
+      skills: skills ? skills : [],
+    });
+    if (res.data) {
+      message.success('Cập nhật thông tin thành công');
+    } else {
+      notification.error({
+        message: 'Có lỗi xảy ra',
+        description: res.message,
+      });
+    }
+  };
+
+  const onchange = (e: any) => {
+    console.log(e.target.value);
+  };
+
+  return (
+    <>
+      <Form onFinish={onFinish} form={form}>
+        <Row gutter={[20, 20]}>
+          <Col span={24}>
+            <Form.Item
+              className="text-base text-[#121212]"
+              label={'Skills'}
+              name={'skills'}
+              rules={[
+                { required: true, message: 'Vui lòng chọn ít nhất 1 skill!' },
+              ]}
+            >
+              <Select
+                mode="multiple"
+                allowClear
+                showArrow={false}
+                style={{ width: '100%' }}
+                placeholder={
+                  <>
+                    <MonitorOutlined /> Tìm theo kỹ năng...
+                  </>
+                }
+                optionLabelProp="label"
+                options={SKILLS_LIST}
+              />
+            </Form.Item>
+          </Col>
+
+          <Col>
+            <Form.Item
+              valuePropName="checked"
+              className="text-base text-[#121212]"
+              label={'Job Level'}
+              name={'skills'}
+              rules={[{ required: true, message: 'Cho phép nhiều lựa chọn ' }]}
+            >
+              <Checkbox
+                onChange={onchange}
+                value={'a'}
+                className="font-semibold"
+              >
+                Fresher (0 - 10 months of experience)
+              </Checkbox>
+              <br></br>
+              <Checkbox>Junior (10 - 36 months of experience)</Checkbox>
+              <br></br>
+
+              <Checkbox>Senior (37 - 60 months of experience)</Checkbox>
+              <br></br>
+
+              <Checkbox>Manager ({'>'} 60 months of experience)</Checkbox>
+            </Form.Item>
+          </Col>
+          <Col span={24}>
+            <AntConfigProvider
+              theme={{
+                token: {
+                  colorPrimary: '#fff',
+                  colorBgContainer: '#ed1b2f',
+                  colorText: '#fff',
+                },
+                components: {
+                  Button: {
+                    defaultHoverBg: '#c82222',
+                    defaultBorderColor: '#ed1b2f',
+                    defaultHoverBorderColor: '#c82222',
+                  },
+                },
+              }}
+            >
+              <Button onClick={() => form.submit()}>Cập nhật</Button>
+            </AntConfigProvider>
+          </Col>
+        </Row>
+      </Form>
+    </>
+  );
 };
 
 const ManageAccount = (props: IProps) => {
   const { open, onClose } = props;
 
-  const onChange = () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const onChange = (key: string) => {
     // console.log(key);
   };
 
@@ -105,7 +246,11 @@ const ManageAccount = (props: IProps) => {
       label: `Rải CV`,
       children: <UserResume />,
     },
-
+    {
+      key: 'email-by-skills',
+      label: `Nhận Jobs qua Email`,
+      children: <JobByEmail />,
+    },
     {
       key: 'user-update-info',
       label: `Cập nhật thông tin`,

@@ -87,6 +87,7 @@ const ModalRole = (props: IProps) => {
         form.setFieldValue(['permissions', x.module], allCheck);
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [listPermissions, singleRole]);
 
   const submitRole = async (valuesForm: any) => {

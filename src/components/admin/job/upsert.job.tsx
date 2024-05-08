@@ -36,14 +36,15 @@ import enUS from 'antd/lib/locale/en_US';
 import dayjs from 'dayjs';
 import { IJob } from '@/types/backend';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const ViewUpsertJob = (props: any) => {
   const [companies, setCompanies] = useState<ICompanySelect[]>([]);
 
   const navigate = useNavigate();
   const [value, setValue] = useState<string>('');
 
-  let location = useLocation();
-  let params = new URLSearchParams(location.search);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
   const id = params?.get('id'); // job id
   const [dataUpdate, setDataUpdate] = useState<IJob | null>(null);
   const [form] = Form.useForm();
@@ -78,6 +79,7 @@ const ViewUpsertJob = (props: any) => {
     };
     init();
     return () => form.resetFields();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   // Usage of DebounceSelect

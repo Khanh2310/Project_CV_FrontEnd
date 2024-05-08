@@ -6,6 +6,7 @@ import { useState, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
+
 interface IProps {
   showPagination?: boolean;
 }

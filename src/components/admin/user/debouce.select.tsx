@@ -18,6 +18,7 @@ export function DebounceSelect<
 >({
   fetchOptions,
   debounceTimeout = 800,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   value,
   ...props
 }: DebounceSelectProps<ValueType>) {

@@ -7,8 +7,8 @@ import { useState, useEffect } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link, useNavigate } from 'react-router-dom';
 import styles from 'styles/client.module.scss';
-import relativeTime from 'dayjs/plugin/relativeTime';
 import dayjs from 'dayjs';
+import relativeTime from 'dayjs/plugin/relativeTime';
 dayjs.extend(relativeTime);
 
 interface IProps {
@@ -28,7 +28,6 @@ const JobCard = (props: IProps) => {
   const [filter, setFilter] = useState('');
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [sortQuery, setSortQuery] = useState('sort=-updatedAt');
-
   const navigate = useNavigate();
 
   useEffect(() => {

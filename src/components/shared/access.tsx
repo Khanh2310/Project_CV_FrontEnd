@@ -1,17 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Result } from 'antd';
 import { useAppSelector } from '@/redux/hooks';
-
 interface IProps {
   hideChildren?: boolean;
   children: React.ReactNode;
   permission: { method: string; apiPath: string; module: string };
 }
-
-// eslint-disable-next-line react-refresh/only-export-components
-export const API_LIST = {
-  APP_DETAIL: {},
-};
 
 const Access = (props: IProps) => {
   //set default: hideChildren = false => vẫn render children
@@ -33,7 +27,6 @@ const Access = (props: IProps) => {
         setAllow(true);
       } else setAllow(false);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [permissions]);
 
   return (

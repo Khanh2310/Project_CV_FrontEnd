@@ -50,6 +50,7 @@ const ViewDetailResume = (props: IProps) => {
       form.setFieldValue('status', dataInit.status);
     }
     return () => form.resetFields();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dataInit]);
 
   return (
@@ -81,9 +82,6 @@ const ViewDetailResume = (props: IProps) => {
             <Form form={form}>
               <Form.Item name={'status'}>
                 <Select
-                  // placeholder="Select a option and change input text above"
-                  // onChange={onGenderChange}
-                  // allowClear
                   style={{ width: '100%' }}
                   defaultValue={dataInit?.status}
                 >

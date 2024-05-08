@@ -27,8 +27,8 @@ import ClientJobDetailPage from './pages/job/detail';
 import ClientCompanyPage from './pages/company';
 import ClientCompanyDetailPage from './pages/company/detail';
 import NotFound from './components/shared/not.found';
-import ProtectedRoute from './components/shared/protected-route';
 import LayoutApp from './components/shared/layout.app';
+import ProtectedRoute from './components/shared/protected-route';
 
 const LayoutClient = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -54,6 +54,7 @@ const LayoutClient = () => {
 
 export default function App() {
   const dispatch = useAppDispatch();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const isLoading = useAppSelector((state) => state.account.isLoading);
 
   useEffect(() => {
@@ -63,6 +64,7 @@ export default function App() {
     )
       return;
     dispatch(fetchAccount());
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const router = createBrowserRouter([

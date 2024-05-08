@@ -12,7 +12,6 @@ import { fetchPermission } from '@/redux/slice/permissionSlide';
 import ViewDetailPermission from '@/components/admin/permission/view.permission';
 import ModalPermission from '@/components/admin/permission/modal.permission';
 import { colorMethod } from '@/config/utils';
-
 import { ALL_PERMISSIONS } from '@/config/permissions';
 import Access from '@/components/shared/access';
 
@@ -52,6 +51,7 @@ const PermissionPage = () => {
       title: 'Id',
       dataIndex: '_id',
       width: 250,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return (
           <a
@@ -81,6 +81,7 @@ const PermissionPage = () => {
       title: 'Method',
       dataIndex: 'method',
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render(dom, entity, index, action, schema) {
         return (
           <p
@@ -106,6 +107,7 @@ const PermissionPage = () => {
       dataIndex: 'createdAt',
       width: 200,
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <>{dayjs(record.createdAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
@@ -116,6 +118,7 @@ const PermissionPage = () => {
       dataIndex: 'updatedAt',
       width: 200,
       sorter: true,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (text, record, index, action) => {
         return <>{dayjs(record.updatedAt).format('DD-MM-YYYY HH:mm:ss')}</>;
       },
@@ -125,6 +128,7 @@ const PermissionPage = () => {
       title: 'Actions',
       hideInSearch: true,
       width: 50,
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       render: (_value, entity, _index, _action) => (
         <Space>
           <Access permission={ALL_PERMISSIONS.PERMISSIONS.UPDATE} hideChildren>
@@ -164,6 +168,7 @@ const PermissionPage = () => {
     },
   ];
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const buildQuery = (params: any, sort: any, filter: any) => {
     const clone = { ...params };
     if (clone.name) clone.name = `/${clone.name}/i`;
@@ -235,6 +240,7 @@ const PermissionPage = () => {
             },
           }}
           rowSelection={false}
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           toolBarRender={(_action, _rows): any => {
             return (
               <Button

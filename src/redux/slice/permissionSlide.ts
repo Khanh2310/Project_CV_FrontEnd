@@ -39,12 +39,14 @@ export const permissionSlide = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     // Add reducers for additional action types here, and handle loading state as needed
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchPermission.pending, (state, action) => {
       state.isFetching = true;
       // Add user to the state array
       // state.courseOrder = action.payload;
     });
 
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     builder.addCase(fetchPermission.rejected, (state, action) => {
       state.isFetching = false;
       // Add user to the state array
@@ -64,6 +66,7 @@ export const permissionSlide = createSlice({
   },
 });
 
+// eslint-disable-next-line no-empty-pattern
 export const {} = permissionSlide.actions;
 
 export default permissionSlide.reducer;
