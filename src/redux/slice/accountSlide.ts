@@ -15,6 +15,7 @@ interface IState {
   isLoading: boolean;
   isRefreshToken: boolean;
   errorRefreshToken: string;
+
   user: {
     _id: string;
     email: string;
@@ -23,6 +24,7 @@ interface IState {
       _id: string;
       name: string;
     };
+
     permissions: {
       _id: string;
       name: string;
@@ -31,6 +33,7 @@ interface IState {
       module: string;
     }[];
   };
+
   activeMenu: string;
 }
 
@@ -39,6 +42,7 @@ const initialState: IState = {
   isLoading: true,
   isRefreshToken: false,
   errorRefreshToken: '',
+
   user: {
     _id: '',
     email: '',
@@ -71,10 +75,12 @@ export const accountSlide = createSlice({
       state.user.role = action?.payload?.role;
       state.user.permissions = action?.payload?.permissions;
     },
+
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     setLogoutAction: (state, action) => {
       localStorage.removeItem('access_token');
       state.isAuthenticated = false;
+
       state.user = {
         _id: '',
         email: '',
@@ -86,6 +92,7 @@ export const accountSlide = createSlice({
         permissions: [],
       };
     },
+
     setRefreshTokenAction: (state, action) => {
       state.isRefreshToken = action.payload?.status ?? false;
       state.errorRefreshToken = action.payload?.message ?? '';
